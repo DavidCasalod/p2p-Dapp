@@ -1,0 +1,65 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4" #test>
+  <!-- Brand Logo -->
+  <a routerLink="/" class="brand-link align-middle" style="height: 80px;"
+    [ngStyle]="{'max-height': test.offsetWidth >= 250 ? '90px' : '80px'}">
+    <div class="row">
+      <div class="col-md-3" style="padding-top: 15px;">
+        <img src="../../assets/dist/img/logo_BD4OPEM.jpg" alt="BD4OPEM Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8; position: center;">
+      </div> 
+      <div class="col-md-12">
+        <span class="brand-text font-weight-light " style="white-space: normal">P2P Trading (ATOS)</span>
+      </div>
+    </div>
+
+
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar" style="padding-top: 30px;">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item ">
+          <a routerLink="/" class="nav-link {{route =='/' ? 'active' : ''}}">
+            <i class="fa fa-user menuIcon"></i>
+            <p>
+              CEC Administration
+            </p>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a routerLink="/service" ngClass="nav-link {{route =='/service' ? 'active' : ''}}">
+          <i class="fa fa-university menuIcon" aria-hidden="true"></i>
+          <p>
+            Service Settings
+          </p>
+        </a>
+
+      </li> 
+      <li class="nav-item"> <a routerLink="/calculate" ngClass="nav-link {{route =='/calculate' ? 'active' : ''}}">
+          <i class="fa fa-search menuIcon"></i>
+          <p>
+            CEC Calculate results
+          </p>
+        </a>
+      </li> 
+      <li class="nav-item">
+        <a routerLink="/read" ngClass="nav-link {{route =='/read' ? 'active' : ''}}">
+          <i class="fa fa fa-history menuIcon" aria-hidden="true"></i>
+          <p>
+            Query Contracts
+          </p>
+        </a>
+      </li> 
+
+    </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+    
+  </div>
+  <!-- /.sidebar -->
+</aside>

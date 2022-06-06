@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+.body-text{
+    font-family: Verdana, Georgia, 'Open Sans', sans-serif;
+}
+.long-text{
+    font-family: Georgia;
+}
+.bold-text{
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}

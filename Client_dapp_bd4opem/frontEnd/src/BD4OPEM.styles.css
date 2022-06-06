@@ -1,0 +1,456 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Text family */
+.body-text{
+    font-family: Verdana, Georgia, 'Open Sans', sans-serif;
+}
+.long-text{
+    font-family: Georgia;
+}
+.bold-text{
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+/* text color */
+/* blue */
+.bd4opem-pri-blue-text, .bd4opem-pri-blue-op-100-text{
+    color: rgba(0, 15, 160, 1);
+}
+.bd4opem-pri-blue-op-75-text{
+    color: rgba(0, 15, 160, 0.75);
+}
+.bd4opem-pri-blue-op-50-text{
+    color: rgba(0, 15, 160, 0.5);
+}
+.bd4opem-pri-blue-op-25-text{
+    color: rgba(0, 15, 160, 0.25);
+}
+
+/* purple */
+
+.bd4opem-pri-purple-text, .bd4opem-pri-purple-op-100-text{
+    color: rgba(160, 0, 160, 1);
+   color: rgba(128, 8, 254, 1);
+}
+.bd4opem-pri-purple-op-75-text{
+    color: rgba(128, 8, 254, 0.75);
+}
+.bd4opem-pri-purple-op-50-text{
+    color: rgba(128, 8, 254, 0.50);
+}
+.bd4opem-pri-purple-op-25-text{
+    color: rgba(128, 8, 254, 0.25);
+}
+
+/* green */
+.bd4opem-pri-green-op-100-text, .bd4opem-pri-green-text{
+    color: rgba(65, 250, 196, 1);
+}
+.bd4opem-pri-green-op-75-text{
+    color: rgba(65, 250, 196, 0.75);
+}
+.bd4opem-pri-green-op-50-text{
+    color: rgba(65, 250, 196, 0.50);
+}
+.bd4opem-pri-green-op-25-text{
+    color: rgba(65, 250, 196, 0.25);
+}
+
+/* orange */
+.bd4opem-pri-orange-op-100-text, .bd4opem-pri-orange-text{
+    color: rgba(227, 157, 21, 1);
+}
+.bd4opem-pri-orange-op-75-text{
+    color: rgba(227, 157, 21, 0.75);
+}
+.bd4opem-pri-orange-op-50-text{
+    color: rgba(227, 157, 21, 0.50);
+}
+.bd4opem-pri-orange-op-25-text{
+    color: rgba(227, 157, 21, 0.25);
+}
+
+
+
+
+/* color palete */
+/* blue */
+.bd4opem-pri-blue, .bd4opem-pri-blue-op-100{
+    background-color: rgba(0, 15, 160, 1);
+}
+.bd4opem-pri-blue-op-75{
+    background-color: rgba(0, 15, 160, 0.75);
+}
+.bd4opem-pri-blue-op-50{
+    background-color: rgba(0, 15, 160, 0.5);
+}
+.bd4opem-pri-blue-op-25{
+    background-color: rgba(0, 15, 160, 0.25);
+}
+
+/* purple */
+.bd4opem-pri-purple-op-100, .bd4opem-pri-purple{
+    background-color: rgba(128, 8, 254, 1);
+}
+.bd4opem-pri-purple-op-75{
+    background-color: rgba(128, 8, 254, 0.75);
+}
+.bd4opem-pri-purple-op-50{
+    background-color: rgba(128, 8, 254, 0.50);
+}
+.bd4opem-pri-purple-op-25{
+    background-color: rgba(128, 8, 254, 0.25);
+}
+
+/* green */
+.bd4opem-pri-green-op-100, .bd4opem-pri-green {
+    background-color: rgba(65, 250, 196, 1);
+}
+.bd4opem-pri-green-op-75{
+    background-color: rgba(65, 250, 196, 0.75);
+}
+.bd4opem-pri-green-op-50{
+    background-color: rgba(65, 250, 196, 0.50);
+}
+.bd4opem-pri-green-op-25{
+    background-color: rgba(65, 250, 196, 0.25);
+}
+
+/* orange */
+.bd4opem-pri-orange-op-100, .bd4opem-pri-orange{
+    background-color: rgba(227, 157, 21, 1);
+}
+.bd4opem-pri-orange-op-75{
+    background-color: rgba(227, 157, 21, 0.75);
+}
+.bd4opem-pri-orange-op-50{
+    background-color: rgba(227, 157, 21, 0.50);
+}
+.bd4opem-pri-orange-op-25{
+    background-color: rgba(227, 157, 21, 0.25);
+}
+
+
+/* color combination */
+
+.bd4opem-combo-purple-orange{
+    background-color: rgba(128, 8, 254, 1);
+    color: rgba(227, 157, 21, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-purple-orange.active{
+    background-color: rgba(128, 8, 254, 0.8);
+    color: rgba(227, 157, 21, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-purple-orange:hover{
+    background-color: rgba(128, 8, 254, 0.65);
+    color: rgba(227, 157, 21, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-orange-purple{
+    background-color: rgba(227, 157, 21, 1);
+    color: rgba(128, 8, 254, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-orange-purple.active{
+    background-color: rgba(227, 157, 21, 0.8);
+    color: rgba(128, 8, 254, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-orange-purple:hover{
+    background-color: rgba(227, 157, 21, 0.65);
+    color: rgba(128, 8, 254, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.bd4opem-combo-green-purple{
+    background-color: rgba(65, 250, 196, 1);
+    color: rgba(128, 8, 254, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-green-purple.active{
+    background-color: rgba(65, 250, 196, 0.8);
+    color: rgba(128, 8, 254, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-green-purple:hover{
+    background-color: rgba(65, 250, 196, 0.65);
+    color: rgba(128, 8, 254, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.bd4opem-combo-purple-green{
+    background-color: rgba(128, 8, 254, 1);
+    color: rgba(65, 250, 196, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-purple-green.active{
+    background-color: rgba(128, 8, 254, 0.8);
+    color: rgba(65, 250, 196, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-purple-green:hover{
+    background-color: rgba(128, 8, 254, 0.65);
+    color: rgba(65, 250, 196, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.bd4opem-combo-blue-orange.active{
+    background-color: rgba(0, 15, 160, 0.8);
+    color: rgba(227, 157, 21, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-blue-orange{
+    background-color: rgba(0, 15, 160, 1);
+    color: rgba(227, 157, 21, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-blue-orange:hover{
+    background-color: rgba(0, 15, 160, 0.65);
+    color: rgba(227, 157, 21, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.bd4opem-combo-orange-blue.active{
+    background-color: rgba(227, 157, 21, 0.8);
+    color: rgba(0, 15, 160, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-orange-blue{
+    background-color: rgba(227, 157, 21, 1);
+    color: rgba(0, 15, 160, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-orange-blue:hover{
+    background-color: rgba(227, 157, 21, 0.65);
+    color: rgba(0, 15, 160, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.bd4opem-combo-green-blue.active{
+    background-color: rgba(65, 250, 196, 0.8);
+    color: rgba(0, 15, 160, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-green-blue{
+    background-color: rgba(65, 250, 196, 1);
+    color: rgba(0, 15, 160, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-green-blue:hover{
+    background-color: rgba(65, 250, 196, 0.65);
+    color: rgba(0, 15, 160, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-blue-green.active{
+    background-color: rgba(0, 15, 160, 0.8);
+    color: rgba(65, 250, 196, 0.8);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.bd4opem-combo-blue-green{
+    background-color: rgba(0, 15, 160, 1);
+    color: rgba(65, 250, 196, 1);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.btn.bd4opem-combo-blue-green:hover{
+    background-color: rgba(0, 15, 160, 0.65);
+    color: rgba(65, 250, 196, 0.65);
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+
+
+/* Proposal1 */
+.new-prop-pri-blue{
+    background-color: #4956C6
+}
+.new-prop-pri-grey{
+    background-color:#7F7CAF;
+}
+.new-prop-pri-green{
+    background-color: #67B6BB;
+}
+.new-prop-pri-white{
+    background-color: #F4F4F9;
+}
+.new-prop-pri-black{
+    background-color: #000000;
+}
+.new-prop-combo-blue-white{
+    background-color: #4956C6;
+    color:#F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-combo-grey-white{
+    background-color:#7F7CAF;
+    color:#F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-combo-green-white{
+    background-color: #67B6BB;
+    color:#F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-combo-blue-green{
+    color: #67B6BB;
+    background-color:#4956C6;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-combo-green-blue{
+    background-color: #67B6BB;
+    color:#4956C6;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+/* proposal 2 */
+/* color palete */
+/* blue */
+.new-prop-2-pri-blue{
+    background-color: #4752cf;
+}
+
+
+/* purple */
+.new-prop-2-pri-purple{
+    background-color: #ad5eff;
+}
+
+/* green */
+.new-prop-2-pri-green {
+    background-color: #94ffe0;
+}
+
+/* orange */
+.new-prop-2-pri-orange{
+    background-color: #e6b24e;
+}
+.new-prop-2-pri-white{
+    background-color: #F4F4F9;
+}
+
+
+/* color combination */
+
+.new-prop-2-combo-purple-orange{
+    background-color: #ad5eff;
+    color: #F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-2-combo-blue-orange{
+    background-color: #4752cf;
+    color: #e6b24e;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-2-combo-orange-blue{
+    background-color: #e6b24e;
+    color: #4752cf;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.new-prop-2-combo-green-blue{
+    background-color: #94ffe0;
+    color: #4752cf;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-2-combo-blue-green{
+    background-color: #4752cf;
+    color: #F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+/* proposal 3 */
+
+.new-prop-3-pri-blue{
+    background-color: #94B3FD;
+}
+
+
+/* purple */
+.new-prop-3-pri-purple{
+    background-color: #B983FF;
+}
+
+/* green */
+.new-prop-3-pri-green {
+    background-color: #99FEFF;
+}
+
+/* orange */
+.new-prop-3-pri-violet{
+    background-color: #e4be78;
+}
+
+.new-prop-3-pri-white{
+    background-color: #F4F4F9;
+}
+
+
+/* color combination */
+
+.new-prop-3-combo-purple-orange{
+    background-color: #B983FF;
+    color: #F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-3-combo-blue-orange{
+    background-color: #94B3FD;
+    color: #e4be78;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-3-combo-orange-blue{
+    background-color: #e4be78;
+    color: #94B3FD;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+
+.new-prop-3-combo-green-blue{
+    background-color: #99FEFF;
+    color: #94B3FD;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.new-prop-3-combo-blue-green{
+    background-color: #94B3FD;
+    color: #F4F4F9;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
