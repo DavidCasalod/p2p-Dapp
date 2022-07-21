@@ -1,5 +1,24 @@
 # P2Ptrading-dapp
 
+###Path test network VM: 
+david.casalod@loras:~/go/src/github.com/david.casalod/fabric-samples/test-network
+
+### Commands:
+./network.sh up
+./network.sh down
+
+Create channel with couchdb to private data collections:
+./network.sh up createChannel -ca -s couchdb
+
+Deploy chaincode:
+It's needed to change the -ccn argument to deploy other version of the chaincode.
+./network.sh deployCC -ccn cec-contract -ccp ../cecContract/ -ccl javascript -ccep "OR('Org1MSP.peer','Org2MSP.peer')" -cccg ../cecContract/collections.json
+
+To remove a chaincode on a peer you need to:
+
+Kill the container that corresponds to the chaincode shim since a chaincode runs inside a docker container.
+
+Delete the chaincode from the file system of the peer under /var/hyperledger/production/chaincodes
 
 
 ## Getting started
