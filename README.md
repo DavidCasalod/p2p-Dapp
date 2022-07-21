@@ -1,6 +1,6 @@
 # P2Ptrading-dapp
 
-###Path test network VM: 
+### Path test network VM: 
 david.casalod@loras:~/go/src/github.com/david.casalod/fabric-samples/test-network
 
 ### Commands:
