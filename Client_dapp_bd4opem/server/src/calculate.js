@@ -16,7 +16,7 @@ class CalculateService {
   * 
   * 
   **/
-   async  calculateCec(cecContractId, ctx) {
+   async calculateCec(cecContractId, tradingPeriod, smartmeterData) {
     //
     try {
 
@@ -37,25 +37,49 @@ class CalculateService {
     
         // Get the contract from the network.
         const contract = network.getContract('cecContract');
-    
-        // Submit the specified transaction.
-        
 
+        //trading perdiod
+        //trading period as UTF-8 buffer
+        const tradingPeriodBuffer = Buffer.from(tradingPeriod, 'utf8');
+        //smart meter data
+        //smart meter data as UTF-8 buffer
+        const smartmeterDatasBuffer = Buffer.from(smartmeterData, 'utf8');
+        //map with key as string and buffer as values
+        const calculateCecTransientMap = {
+          tradingPeriod: tradingPeriodBuffer,
+          smartmeterData: smartmeterDatasBuffer
+        };    
+        
+        // Submit the specified transaction.
+      
         await contract.createTransaction("calculateCECtrading")
-        .setTransient(ctx)
+        .setTransient(calculateCecTransientMap)
         .submit(cecContractId);
-        console.log('Transaction has been submitted');clear
+        console.log('Transaction calculate has been submitted');
+        
+        //Second read cec Year month calculated before. 
+        const resultBuffer = await contract.createTransaction("readCecYearMonth")
+        .setTransient('')
+        .submit(cecContractId);
+        console.log('Transaction read read has been submitted');
+
+       //Convert from buffer to string
+       const result = resultBuffer.toString();
+       console.log(result);
+    
     
         // Disconnect from the gateway.
         gateway.disconnect();
-    
+        
       } catch (error) {
         console.error('Failed to submit transaction:',error);
         process.exit(1);
       }
+    
     }
  }
   // prueba
   //void startCec();
 
 module.exports = CalculateService;
+

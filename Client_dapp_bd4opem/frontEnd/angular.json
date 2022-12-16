@@ -71,7 +71,9 @@
               "browserTarget": "template-adminLte:build:production"
             },
             "development": {
-              "browserTarget": "template-adminLte:build:development"
+              "browserTarget": "template-adminLte:build:development",
+              "host": "testservice.bd4opem.eu",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"

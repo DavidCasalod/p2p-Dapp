@@ -1,0 +1,99 @@
+
+<td>{{ message }}</td> 
+
+<div class="container mt-16">
+  
+  <h2> List of contracts: </h2>
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th></th>
+          <th>Service User Contract ID</th>
+          <th>Name</th>
+          <th>Algorithm</th>
+          <th>Status</th>
+          <th>Execution status</th>
+        </tr>
+    </thead>
+    
+      <tbody *ngFor="let contract of Contracts; let i = index ">
+        <tr>
+          <!-- <button class="button button2" (click)="enableDisableRule()"
+          [ngClass]="{'blue' : toggle, 'green': !toggle}" (click)="onSelect(contract)">
+            <td>{{ status }}</td>
+          </button>  -->
+          <button class="button button2"  (click)="onSelect(contract)">
+            <td> Manage </td>
+          </button> 
+          <td>{{ contract.contractID! }}</td>
+          <ng-container *ngFor="let data_parameters of contract.data_parameters; let z = index">
+            <td>{{ contract.business_parameters?.contractName! }}</td>
+          </ng-container>
+          <td><select (change)="selectChangeHandler($event)">
+            <option value="Cooperative"></option>
+            <option value="Cooperative">Cooperative</option>
+            <option value="Competitive">Competitive </option>
+            </select>
+          </td>
+          <td>{{ contract.status! }}</td>
+          <td><div style="color:MediumSeaGreen;" *ngIf=" contract.status! == 'Active'">{{ contract.status! }} &#x25CF; </div>
+              <ng-template style="color:rgb(180, 41, 41);"  ngIf="contract.status! != 'Active'"> Inacitve </ng-template>
+          <td> 
+        </tr>
+      </tbody>
+  </table>
+<br>
+<br>
+
+  <div *ngIf="selectedContract && selectedAlg == 'Cooperative'">
+     <h4 >Contract info</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>CEC Service User Contract:  {{ contract.contractID! }} </th>
+                <td> <button class="button button3" (click)="open(contract)"> View Contract </button></td>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <th> Status </th>
+                <div  *ngIf=" contract.status! == 'Active'">
+                  <td style="color:MediumSeaGreen;">{{ contract.status! }}  <td> 
+                </div>
+                <ng-template  ngIf="contract.status! != 'Active'">
+                  <td style="color:rgb(180, 41, 41);" > Inacitve  </td> 
+                </ng-template>
+              </tr>
+              <tr>
+                <th> Algorithm </th>
+                <td>{{ selectedAlg }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered border-info">
+            
+            <thead class="table-dark">
+                <tr>
+                  <th>Smart meter ID</th>
+                  <th>Retailer</th>
+                  <th>Sell Discount %</th>
+                  <th>Buy Discount %</th>
+                </tr>
+            </thead>
+
+            <tbody *ngFor="let data_parameter of selectedContract.data_parameters; let t = index">
+              <tr *ngFor="let meteringPoints of selectedContract.data_parameters?.[t]?.meteringPoints; let z = index">
+                <td >
+                {{ data_parameter?.meteringPoints?.[z]!}}</td>
+              
+              <td>Retailer X</td>
+              <td> - </td>
+              <td> - </td>
+            </tr>
+            </tbody>
+          </table>
+
+  </div>
+</div>

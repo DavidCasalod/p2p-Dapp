@@ -1,0 +1,50 @@
+
+<form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
+    <div class="form-group col-md-6">
+      <label for="exampleInputEmail1">CEC Contract Id:</label>
+      <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Cec contract id">
+    </div>
+  <button type="submit" [disabled]="!addForm.valid" class="btn btn-danger">Submit</button>
+  <!-- <div class="form-group col-md-12">
+    <label for="exampleInputEmail1">Contract details:</label> 
+    <div class="row">
+        <div class="col-md-7">
+            <p>{{results}}</p>
+       </div> 
+    </div>  
+    </div>  -->
+    <br>
+    <div class="container">  
+        <br>
+        <h4> Contract details:</h4>  
+          
+        <table class="table table-striped">  
+          <thead>  
+              <tr>  
+                <th>ID</th>  
+                <th>Organization</th>  
+                <th>Start</th>  
+                <th>End</th>  
+                <th>State</th>  
+                <th>Algorithm</th>  
+                <th>Version</th>  
+              </tr>  
+          </thead>  
+          <tbody>  
+           
+              <td>{{ results.cecContractId }}</td>  
+              <td>{{ results.contractedByByOrgId }}</td>  
+              <td>{{ results.contractStart }}</td>  
+              <td>{{ results.contractEnd }}</td>  
+              <td>{{ results.state }}</td>  
+              <td>{{ results.algorithm }}</td>  
+              <td>{{ results.version }}</td>  
+        
+          </tbody>  
+        </table>  
+      </div>  
+</form>
+<h3>Convert Json to CSV file and Download it in the .csv format</h3>
+
+<button (click)="download()"> Download </button>
+

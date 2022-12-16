@@ -6,6 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var serviceSettingsRouter = require('./routes/serviceSettings');
+var serviceResultsRouter = require('./routes/serviceResults');
+var readResultsRouter = require('./routes/read');
+var queryContractRouter = require('./routes/query');
 var cors = require('cors');
 
 var app = express();
@@ -20,9 +23,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/serviceSettings', serviceSettingsRouter);
+app.use('/serviceResults', serviceResultsRouter);
+app.use('/read', readResultsRouter);
+app.use('/query', queryContractRouter);
 
 app.all("/*", function(req, res, next){
   res.header('Access-Control-Allow-Origin', '*');
@@ -35,6 +42,7 @@ app.post('/ping', function (req, res) {
   res.send(req.body);
   console.log(req.body)
 });
+
 
 
 // catch 404 and forward to error handler

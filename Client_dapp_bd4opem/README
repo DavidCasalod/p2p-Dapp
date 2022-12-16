@@ -1,0 +1,6 @@
+server:
+nodemon --exec npm start app.js
+
+front end:
+src/app
+ng serve  

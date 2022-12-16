@@ -10,11 +10,13 @@ import { FooterComponent } from './components/adminLTE/footer/footer.component';
 import { HeaderComponent } from './components/adminLTE/header/header.component';
 import { SidebarComponent } from './components/adminLTE/sidebar/sidebar.component';
 import { FirstRouteComponent } from './components/first-route/first-route.component';
-import { LoginComponent } from './components/login/login.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { CalculateComponent } from './components/calculate/calculate.component';
 import { ReadComponent } from './components/read/read.component';
-
+import { CalculateComponent } from './components/calculate/calculate.component';
+import { QueryComponent } from './components/query/query.component';
+import { AuthGuardModalComponent } from './components/auth-guard-modal/auth-guard-modal.component';
+import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
+import { ContractService } from './services/contract.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +25,13 @@ import { ReadComponent } from './components/read/read.component';
     SidebarComponent,
     FooterComponent,
     FirstRouteComponent,
-    LoginComponent,
-    AdminComponent,
+    ReadComponent,
+    QueryComponent,
     CalculateComponent,
-    ReadComponent
+    AuthGuardModalComponent,
+    ListOfContractsComponent,
+   
+
   ],
   imports: [
     BrowserModule,
@@ -34,8 +39,12 @@ import { ReadComponent } from './components/read/read.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule
+    
+    
+    
   ],
-  providers: [],
+  providers: [ContractService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

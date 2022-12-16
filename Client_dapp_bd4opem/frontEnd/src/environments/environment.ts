@@ -3,10 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  marketplaceUrl: "https://marketplace.bd4opem.eu",
+  loginReturnUrl: "testservice.bd4opem.eu:4200" ,
+  apiUrl: "/api/"
 };
 
 /*
+
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

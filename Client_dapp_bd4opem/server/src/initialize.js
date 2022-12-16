@@ -16,7 +16,7 @@ class InitializeService {
   * 
   * 
   **/
-   async  startCec(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version, ctx) {
+   async  startCec(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version, conctractedByEmail, tradingParams) {
     //
     try {
 
@@ -39,12 +39,21 @@ class InitializeService {
         const contract = network.getContract('cecContract');
     
         // Submit the specified transaction.
-        
+        const contractedByEmailBuffer = Buffer.from(conctractedByEmail);
+        //trading params
+        //cecTradingParams as UTF-8 buffer
+        const tradingParamsBuffer = Buffer.from(tradingParams, 'utf8');
+        //map with key as string and buffer as values
+        const transientMap = {
+          contractedByEmail: contractedByEmailBuffer,
+          cecTradingParams: tradingParamsBuffer
+        };
+      
 
         await contract.createTransaction("startCecContract")
-        .setTransient(ctx)
+        .setTransient(transientMap)
         .submit(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
-        console.log('Transaction has been submitted');clear
+        console.log('Transaction has been submitted');
     
         // Disconnect from the gateway.
         gateway.disconnect();
@@ -53,10 +62,12 @@ class InitializeService {
         console.error('Failed to submit transaction:',error);
         process.exit(1);
       }
+      return 'Transaction has been submitted'
     }
+    
  }
   // prueba
-  //void startCec();
+  
 
 module.exports = InitializeService;
 

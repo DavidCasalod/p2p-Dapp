@@ -38,4 +38,8 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/query']);
   }
 
+  navigateTest(): void {
+    this.router.navigate(['/test']);
+  }
+
 }

@@ -1,0 +1,20 @@
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+  }
+
+  .button3 {
+    background-color: rgb(192, 233, 238); 
+    color: darkblue; 
+    border: 2px solid #008CBA;
+  }
+
+  .blue {
+    background-color: rgb(164, 233, 233);
+  }
+  
+  .green {
+    background-color: rgb(37, 240, 105);
+  }
+  

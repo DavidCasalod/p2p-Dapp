@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { tap } from  'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from  'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +9,13 @@ import { Observable } from  'rxjs';
 export class ReadCecService {
 
   URL_SERVER = "http://localhost:3000"
+ 
   constructor(private httpClient: HttpClient) { }
   
-  initialize(args: any): Observable<Object>{
 
-    return this.httpClient.get(this.URL_SERVER + '/read', args).pipe(
-      tap((res: any) => {
-        console.log(res)
-      }
-      )
-    );
+  getResults(id: string): Observable<any>{
+    return this.httpClient.post<string>(this.URL_SERVER + '/read', id);
   }
-}
+
+ 
+ }

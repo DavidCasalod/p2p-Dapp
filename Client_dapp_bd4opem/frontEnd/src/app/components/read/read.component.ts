@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReadCecService } from  '../../services/read-cec.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CalculateArguments } from 'src/app/models/calculate-arguments';
+import { JsonConvertService } from  '../../services/json-convert.service';
 
 @Component({
   selector: 'app-read',
@@ -9,27 +11,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./read.component.css']
 })
 export class ReadComponent implements OnInit {
-
-  constructor(private readcecservice: ReadCecService, private router: Router,private formBuilder: FormBuilder) { }
-
+  results!: CalculateArguments[];
+  
+  constructor(private readcecservice: ReadCecService, 
+              private router: Router,private formBuilder: FormBuilder,
+              private jsonConvertservice : JsonConvertService) { }
+  
   addForm = new FormGroup({
     contractId: new FormControl('', Validators.required),
-    context: new FormControl('',  Validators.required)
+    date: new FormControl('', Validators.required)
   });
   ngOnInit(): void {
     this.addForm=this.formBuilder.group({
       contractId: ['', Validators.required],
-      context: ['', Validators.required]
+      date: ['', Validators.required]
     });
+   
   }
 
+  
   onSubmit(addForm: { value: any; }) {
-    console.log(addForm.value);
-    this.readcecservice.initialize(addForm.value).subscribe((res)=>{
-      console.log("ha funcionado!");
-      this.router.navigateByUrl('calculate');
-    }
+    this.readcecservice.getResults(addForm.value).subscribe((res)=>{
+      this.router.navigateByUrl('read');
+      console.log("RESULTADO =")
+      console.log(res)
+      this.results = JSON.parse(res.toString());
+      console.log(this.results)
+    } 
     )
+  }
+  download(){
+    console.log(this.results)
+    this.jsonConvertservice.downloadFile(this.results, 'jsonResults_to_csv');
+    
   }
 
 

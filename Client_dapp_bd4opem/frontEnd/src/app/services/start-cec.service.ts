@@ -5,7 +5,7 @@ import { tap } from  'rxjs/operators';
 import { Observable } from  'rxjs';
 
 import { TransactionArguments } from  '../models/transaction-arguments';
-import { JsonPipe } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'

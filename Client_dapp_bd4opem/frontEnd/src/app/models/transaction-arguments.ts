@@ -1,5 +1,5 @@
 export interface TransactionArguments {
-    cecContractId: string,
+    cecContractId: string ,
 
     contractedByByOrgId: string,
   
@@ -13,5 +13,7 @@ export interface TransactionArguments {
   
     version: string,
 
-    context: string
+    email: string,
+
+    tradingParams: string
 }

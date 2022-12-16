@@ -4,11 +4,19 @@
       <label for="exampleInputEmail1">CEC Contract Id:</label>
       <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Cec contract id">
     </div>
-
     <div class="form-group col-md-6">
-      <label for="exampleInputEmail1">Context:</label>
-      <input type="text" class="form-control" formControlName="context" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="json context">
+      <label for="exampleInputEmail1">Year month:</label>
+      <input type="text" class="form-control" formControlName="date" id="date" aria-describedby="date" placeholder=" year month 2020-12">
     </div>
-  
   <button type="submit" [disabled]="!addForm.valid" class="btn btn-danger">Submit</button>
+
+  <div class="form-group col-md-12">
+    <label for="exampleInputEmail1">Your results are available to download:</label>
+    <button (click)="download()"> Download csv</button>
+    <!-- <div class="row">
+      <pre [innerHTML]="results | json">
+        <td>{{ results }}</td>  
+      </pre>
+    </div>   -->
+  </div> 
 </form>
