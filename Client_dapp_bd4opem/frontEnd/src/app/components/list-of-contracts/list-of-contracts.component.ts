@@ -4,10 +4,9 @@ import jwtDecode from 'jwt-decode';
 import { TransactionArguments } from  'src/app/models/transaction-arguments';
 import { ContractService } from '../../services/contract.service';
 import { ReturnContract } from 'src/app/models/returnContract';
-import { Contract } from 'src/app/models/contract';
-import { NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { StartCecService } from 'src/app/services/start-cec.service';
-
+// import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 export interface SSITokenDecoded {
   aud: string;
@@ -24,6 +23,36 @@ export interface SSITokenDecoded {
   connectionID: string;
   accountID : string;
 }
+// @Component({
+//   selector: 'app-dialog',
+//   template: `
+
+//   <div class="modal-header">
+//   <div mat-dialog-content>
+//     <p>The P2P Trading Smart Contract has been successfully started</p>
+//   </div>
+//   <div mat-dialog-actions>
+//     <button mat-button (click)="onNoClick()">Close</button>
+//   </div>
+//   </div>
+//   `
+//   ,
+//   styles:  [
+//         `
+//         .light-blue-backdrop {
+//           background-color: #5cb3fd;
+//         }
+//       `,
+//     ],
+//   encapsulation: ViewEncapsulation.None
+// })
+// export class DialogComponent {
+//   constructor(public dialogRef: MatDialogRef<DialogComponent>) {}
+  
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
 
 @Component({
 	selector: 'ngbd-modal-content',
@@ -37,9 +66,8 @@ export interface SSITokenDecoded {
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td>Algorithm: <button> Equality</button></td>
+                <td>Algorithm: <button> Cooperative</button></td>
                 <td style="color:green">State:  Active </td>
-                <td> <button style="color: blue;" (click)="initialise()" > Initialise </button></td>
               </tr> 
             </tbody>
           </table>
@@ -93,7 +121,7 @@ export class NgbdModalContent  implements OnInit{
   ngOnInit(): void {
     document.getElementsByTagName('ngb-modal-backdrop').item(0)?.removeAttribute('style')
     console.log(this.c)
-    console.log(this.result)
+    console.log("resultado:"+ this.result)
   }
   
 
@@ -137,13 +165,18 @@ export class ListOfContractsComponent implements OnInit {
   toggle!: boolean;
   status = "Manage";
   arguments! : TransactionArguments ;
+  args! : TransactionArguments 
+  formBuilder: any;
+  check: boolean = false;
 
   constructor(private cookieService: CookieService,
     private contractservice: ContractService,
     private modalService: NgbModal,
+    private startcecservice: StartCecService
    ) { 	}
 
     async ngOnInit():  Promise<string> {
+ 
     this.token = this.cookieService.get('authentication');
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
@@ -177,6 +210,7 @@ export class ListOfContractsComponent implements OnInit {
     return this.Contracts, this.message
  }
  onSelect(contract: ReturnContract) {
+  
     console.log(contract);
     this.contract = contract;
     this.contract_ID = contract.contractID;
@@ -188,7 +222,6 @@ export class ListOfContractsComponent implements OnInit {
       console.log(response);
       this.selectedContract = response
       this.result = JSON.stringify(this.selectedContract)
-      
       console.log(this.result)
     },
     
@@ -223,22 +256,21 @@ export class ListOfContractsComponent implements OnInit {
     this.token = this.cookieService.get('authentication');
     console.log(this.token);
     console.log(contract.status!);
+    this.contractservice.fetchContract(this.token, contract.contractID!).subscribe(
+      res => {
+        this.c =JSON.stringify(res)
+        modalRef.componentInstance.c = this.c
+      },
+    )
+
     this.contractservice.fetchContract(this.token, contract?.data_parameters?.[0].contractID!).subscribe(
       response => {
       console.log(response);
       this.selectedContract = response
-
-      // this.arguments.cecContractId! = this.selectedContract.contractID!
-      // this.arguments.contractEnd! = this.selectedContract.business_parameters?.contractEnd!
-      // this.arguments.contractStart = this.selectedContract.business_parameters?.contractStart!
-      // this.arguments.contractedByByOrgId = this.selectedContract.business_parameters?.contractedByOrgID!
-      // this.arguments.email = this.selectedContract.business_parameters?.contractedByEmail!
-      // this.arguments.state = this.selectedContract.status!
-      // this.arguments.tradingParams = this.selectedContract.serviceParameters
-      // this.arguments.version = this.selectedContract.version!
       this.result = JSON.stringify(this.selectedContract)
-      modalRef.componentInstance.result = this.selectedContract;
+      modalRef.componentInstance.result = this.result;
       console.log(this.result)
+      console.log(this.arguments)
     },
     
     (error) => {
@@ -259,31 +291,49 @@ export class ListOfContractsComponent implements OnInit {
           break;
       }
     },
+    
+  
     )
     
 		const modalRef = this.modalService.open(NgbdModalContent,  { scrollable: true,
         backdropClass: 'light-blue-backdrop',
         size: 'xl',
         centered: true  });
-    // modalRef.componentInstance.args = this.arguments;
-		modalRef.componentInstance.c = this.c;
+    modalRef.componentInstance.args = this.arguments;
+		// modalRef.componentInstance.c = this.c;
     modalRef.componentInstance.contract_s = this.contract_ID;
     modalRef.componentInstance.contract_id_dataUser = this.contract_ID_du;
     modalRef.componentInstance.selectedContract = this.selectedContract;
 	}
 
+  initialise( contract:ReturnContract) {
+
+    this.check = true;
+      this.startcecservice.initialize_oracle(contract).subscribe((res)=>{
+        console.log(res);
+      }
+      )
+    }
+  
   selectChangeHandler (event: any) {
-    //update the ui
     this.selectedAlg = event.target.value;
     console.log(this.selectedAlg);
-    this.arguments.algorithm = this.selectedAlg!
+    
   }
+  // openDialog() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.position = 'center';
 
-  // enableDisableRule() {
-  //   this.toggle = !this.toggle;
-  //   this.status = this.toggle ? "Manage" : "-";
+  //   const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
   // }
 }
+
+
 
 
 

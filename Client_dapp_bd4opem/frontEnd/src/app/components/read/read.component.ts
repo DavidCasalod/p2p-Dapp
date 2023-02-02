@@ -26,8 +26,10 @@ export class ReadComponent implements OnInit {
       contractId: ['', Validators.required],
       date: ['', Validators.required]
     });
+
+}
    
-  }
+
 
   
   onSubmit(addForm: { value: any; }) {
@@ -42,7 +44,8 @@ export class ReadComponent implements OnInit {
   }
   download(){
     console.log(this.results)
-    this.jsonConvertservice.downloadFile(this.results, 'jsonResults_to_csv');
+
+    this.jsonConvertservice.downloadFile(this.results, 'Results');
     
   }
 

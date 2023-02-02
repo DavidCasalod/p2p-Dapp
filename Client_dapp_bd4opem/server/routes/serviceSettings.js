@@ -20,7 +20,9 @@ router.post('/', async (req, res, next) => {
   try {
     if (!cecContractId || !contractedByByOrgId || !contractStart || !contractEnd ||
       !state || !algorithm || !version || !tradingParams || !conctractedByEmail ) {
+      console.log(req.body)
       return res.status(500).json("Missing requied fields");
+      
     } else {
       const result = await await initializeInstance.startCec(cecContractId, contractedByByOrgId, contractStart, contractEnd , state, algorithm, version, conctractedByEmail, tradingParams);
       return res.status(200).json(result);

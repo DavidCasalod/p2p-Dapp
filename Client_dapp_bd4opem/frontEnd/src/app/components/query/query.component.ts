@@ -24,8 +24,8 @@ export class QueryComponent implements OnInit {
     this.addForm=this.formBuilder.group({
       contractId: ['', Validators.required]
     });
+  
   }
-
    
   onSubmit(addForm: { value: any; }) {
     this.querycontractservice.getContract(addForm.value).subscribe((res)=>{

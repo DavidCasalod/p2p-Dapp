@@ -5,6 +5,21 @@ const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { Wallets, Gateway } = require('fabric-network');
+
+   // prueba
+  /**
+ * Clean the string removing escape sequences
+ * @param {String} string to clean
+ * @returns {String} string cleaned
+ */
+   async function cleanString(string) {
+    string.replace("\\n", "");
+    string.replace("\\r", "");
+    string.replace("\\t", "");
+    string.replace("\\", "");
+    return string;
+  }
+  
 class InitializeService {
   /**
   * 1. Select an identity from a wallet
@@ -16,6 +31,7 @@ class InitializeService {
   * 
   * 
   **/
+
    async  startCec(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version, conctractedByEmail, tradingParams) {
     //
     try {
@@ -41,13 +57,18 @@ class InitializeService {
         // Submit the specified transaction.
         const contractedByEmailBuffer = Buffer.from(conctractedByEmail);
         //trading params
+        var tradingParams_string = JSON.stringify(tradingParams);
+        var tradingParams_cleand = await cleanString(tradingParams_string)
         //cecTradingParams as UTF-8 buffer
-        const tradingParamsBuffer = Buffer.from(tradingParams, 'utf8');
+        const tradingParamsBuffer = Buffer.from(tradingParams_cleand, 'utf8');
         //map with key as string and buffer as values
         const transientMap = {
           contractedByEmail: contractedByEmailBuffer,
           cecTradingParams: tradingParamsBuffer
         };
+
+        console.log(tradingParams)
+        console.log(tradingParamsBuffer)
       
 
         await contract.createTransaction("startCecContract")
@@ -66,10 +87,9 @@ class InitializeService {
     }
     
  }
-  // prueba
-  
 
 module.exports = InitializeService;
+
 
   //await contract.submitTransaction('startCecContract', cecContractId, ctx.toString(), contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
         //await contract.submitTransaction('startCecContract', "cecContractId", "contractedByByOrgI", "contractStart", "contractEnd", "state", "algorithm", "version");

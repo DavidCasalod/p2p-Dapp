@@ -28,7 +28,7 @@ export interface ReturnContract {
     /**
      * Contract claims specific to a Service User.
      */
-    serviceParameters?: any;
+    service_parameters?: any;
     data_parameters?: Array<{
         contractID: string;
         oganizationId	: string;

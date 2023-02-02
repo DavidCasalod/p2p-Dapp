@@ -18,3 +18,10 @@
     background-color: rgb(37, 240, 105);
   }
   
+  .active {
+    color: green;
+  }
+  
+  .inactive {
+    color: red;
+  }

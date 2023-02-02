@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full',  redirectTo: 'service'},
   { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
   { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
-  { path: 'test', component: ListOfContractsComponent },
+  { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },
 
 
   // { path: 'text', component:Component } 

@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var serviceSettingsRouter = require('./routes/serviceSettings');
+var serviceSettingsRouter_2 = require('./routes/serviceSettings_2');
 var serviceResultsRouter = require('./routes/serviceResults');
 var readResultsRouter = require('./routes/read');
 var queryContractRouter = require('./routes/query');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/serviceSettings', serviceSettingsRouter);
+app.use('/serviceSettings_2', serviceSettingsRouter_2);
 app.use('/serviceResults', serviceResultsRouter);
 app.use('/read', readResultsRouter);
 app.use('/query', queryContractRouter);
