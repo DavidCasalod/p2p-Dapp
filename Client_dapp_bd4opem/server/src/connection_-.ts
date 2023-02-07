@@ -5,11 +5,11 @@
  */
 
 import * as grpc from '@grpc/grpc-js';
-import {  Identity, Signer, signers } from '@hyperledger/fabric-gateway';
+import {  connect, Gateway, Identity, Signer, signers } from '@hyperledger/fabric-gateway';
 import * as crypto from 'crypto';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-
+import { P2P_DAPP_SAMPLE_PATH,P2P_DAPP_NETWORK_NAME, P2P_DAPP_ORG1MSP, P2P_DAPP_NODE, P2P_DAPP_USER, P2P_DAPP_PEER, P2P_DAPP_PEER_ENDPOINT,P2P_DAPP_OVERRIDE_AUTH } from './config';
 
 // export async function newGrpcConnection(): Promise<grpc.Client> {
 //     if (TLS_CERT_PATH) {
@@ -21,31 +21,56 @@ import * as path from 'path';
 //     return new grpc.Client(GATEWAY_ENDPOINT, grpc.ChannelCredentials.createInsecure());
 // }
 
-const mspId = envOrDefault('MSP_ID', 'Org1MSP');
+const mspId = P2P_DAPP_ORG1MSP;
+
+const samplePath = P2P_DAPP_SAMPLE_PATH;
+const node = P2P_DAPP_NODE;
+const networkname = P2P_DAPP_NETWORK_NAME;
+const user = P2P_DAPP_USER;
+const peer = P2P_DAPP_PEER;
+
 
 // Path to crypto materials.
-const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
+const cryptoPath =  path.resolve(samplePath, networkname, 'organizations', 'peerOrganizations', node);
 
 // Path to user private key directory.
-const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', 'User1@org1.example.com', 'msp', 'keystore'));
+const keyDirectoryPath = path.resolve(cryptoPath, user, 'User1@org1.example.com', 'msp', 'keystore');
 
 // Path to user certificate.
-const certPath = envOrDefault('CERT_PATH', path.resolve(cryptoPath, 'users', 'User1@org1.example.com', 'msp', 'signcerts', 'cert.pem'));
+const certPath =  path.resolve(cryptoPath, user, 'User1@org1.example.com', 'msp', 'signcerts', 'cert.pem');
 
 // Path to peer tls certificate.
-const tlsCertPath = envOrDefault('TLS_CERT_PATH', path.resolve(cryptoPath, 'peers', 'peer0.org1.example.com', 'tls', 'ca.crt'));
+const tlsCertPath =  path.resolve(cryptoPath, P2P_DAPP_PEER, 'peer0.org1.example.com', 'tls', 'ca.crt');
 
 // Gateway peer endpoint.
-const peerEndpoint = envOrDefault('PEER_ENDPOINT', 'localhost:7051');
+const peerEndpoint = P2P_DAPP_PEER_ENDPOINT
 
 // Gateway peer SSL host name override.
-const peerHostAlias = envOrDefault('PEER_HOST_ALIAS', 'peer0.org1.example.com');
+const peerHostAlias = P2P_DAPP_OVERRIDE_AUTH
 
 /**
  * envOrDefault() will return the value of an environment variable, or a default value if the variable is undefined.
  */
-
-
+export async function newGatewayConnection(client: grpc.Client): Promise<Gateway> {
+    return connect({
+        client,
+        identity: await newIdentity(),
+        signer: await newSigner(),
+        // Default timeouts for different gRPC calls
+        evaluateOptions: () => {
+            return { deadline: Date.now() + 5000 }; // 5 seconds
+        },
+        endorseOptions: () => {
+            return { deadline: Date.now() + 15000 }; // 15 seconds
+        },
+        submitOptions: () => {
+            return { deadline: Date.now() + 5000 }; // 5 seconds
+        },
+        commitStatusOptions: () => {
+            return { deadline: Date.now() + 60000 }; // 1 minute
+        },
+    });
+}
 
 export async function newGrpcConnection(): Promise<grpc.Client> {
     const tlsRootCert = await fs.readFile(tlsCertPath);

@@ -1,13 +1,13 @@
 'use strict';
 
-const path = require('path');
-// Bring key classes into scope, most importantly Fabric SDK network class
-const fs = require('fs');
-const yaml = require('js-yaml');
-// const { Wallets, Gateway } = require('fabric-network');
 
-const crypto = require('crypto');
-const { connect, Identity, signers } = require('@hyperledger/fabric-gateway');
+const {CHANNEL_NAME,CHAINCODE_NAME} = require('./config');
+// var _connect = require("./connection.js");
+// import { newGatewayConnection, newGrpcConnection } from './connection';
+
+const ConnectService = require('./connection');
+const _connect = new ConnectService();
+
 class QueryService {
   /**
   * 1. Select an identity from a wallet
@@ -18,7 +18,7 @@ class QueryService {
   * 6. Process response
   * 
   * 
-  **/
+  **/y
    async  queryCec(contractId) {
     //
     try {
@@ -37,38 +37,48 @@ class QueryService {
        
         // await gateway.connect(connectionProfile, connectionOptions);
 
-        //New GATEAWAY connection
-        const credentials = await fs.readFile('home/david.casalod/go/src/github.com/david.casalod/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem', 'utf8');
-        const identity = { mspId: 'org1.example.com', credentials };
+        // //New GATEAWAY connection
+        // const credentials = await fs.readFile('home/david.casalod/go/src/github.com/david.casalod/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem', 'utf8');
+        // const identity = { mspId: 'org1.example.com', credentials };
     
-        const privateKeyPem = await fs.readFile('home/david.casalod/go/src/github.com/david.casalod/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore', 'utf8');
-        const privateKey = crypto.createPrivateKey({key: privateKeyPem, format: 'pem', type: 'pkcs8'});
-        const signer = signers.newPrivateKeySigner(privateKey);
+        // const privateKeyPem = await fs.readFile('home/david.casalod/go/src/github.com/david.casalod/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore', 'utf8');
+        // const privateKey = crypto.createPrivateKey({key: privateKeyPem, format: 'pem', type: 'pkcs8'});
+        // const signer = signers.newPrivateKeySigner(privateKey);
     
-        const client = new grpc.Client('gateway.example.org:1337', grpc.credentials.createInsecure());
+        // const client = new grpc.Client('gateway.example.org:1337', grpc.credentials.createInsecure());
     
-        const gateway = await connect({ identity, signer, client });
 
+        await _connect.displayInputParameters();
+
+        // The gRPC client connection should be shared by all Gateway connections to this endpoint.
+    
+        const client = await _connect.newGrpcConnection()
+        
+        const gateway = await _connect.newGatewayConnection(client);
+    
     
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork(CHANNEL_NAME);
     
         // Get the contract from the network.
-        const contract = network.getContract('CEC-Contract');
+        const contract = network.getContract(CHAINCODE_NAME);
     
         // Submit the specified transaction.
-        
 
-        const resultBuffer = await contract.createTransaction("readCecContract")
+        //TODO CHANGE SUBMIT TRANSAC
+        const resultBuffer = await contract.submitTransaction("readCecContract")
         .setTransient('')
         .submit(contractId);
+
+
         console.log('Transaction has been submitted');
         console.log(resultBuffer);
         let result =  resultBuffer.toString();
         console.log(result);
         
         // Disconnect from the gateway.
-        gateway.disconnect();
+        gateway.close();
+        client.close();
         return result;
 
       } catch (error) {
