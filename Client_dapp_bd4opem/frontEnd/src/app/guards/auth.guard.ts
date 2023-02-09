@@ -2,7 +2,7 @@ import { ElementRef, Injectable, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { AuthGuardModalComponent } from '../components/auth-guard-modal/auth-guard-modal.component';
 
 import { AuthenticateService } from '../services/authenticate.service';

@@ -24,13 +24,13 @@ const { P2P_DAPP_SAMPLE_PATH,P2P_DAPP_NETWORK_NAME, P2P_DAPP_ORG1MSP,
      const cryptoPath =  path.resolve(samplePath, networkname, 'organizations', 'peerOrganizations', node);
      
      // Path to user private key directory.
-     const keyDirectoryPath = path.resolve(cryptoPath, user, 'User1@org1.example.com', 'msp', 'keystore');
+     const keyDirectoryPath = path.resolve(cryptoPath, "users", user,'msp', 'keystore');
      
      // Path to user certificate.
-     const certPath =  path.resolve(cryptoPath, user, 'User1@org1.example.com', 'msp', 'signcerts', 'cert.pem');
+     const certPath =  path.resolve(cryptoPath, "users", user, 'msp', 'signcerts', 'cert.pem');
      
      // Path to peer tls certificate.
-     const tlsCertPath =  path.resolve(cryptoPath, peer, 'peer0.org1.example.com', 'tls', 'ca.crt');
+     const tlsCertPath =  path.resolve(cryptoPath, "peers", peer, 'tls', 'ca.crt');
      
      // Gateway peer endpoint.
      const peerEndpoint = P2P_DAPP_PEER_ENDPOINT
@@ -48,8 +48,8 @@ class ConnectService {
 async  newGatewayConnection(client) {
     return connect({
         client,
-        identity: await newIdentity(),
-        signer: await newSigner(),
+        identity: await this.newIdentity(),
+        signer: await this.newSigner(),
         // Default timeouts for different gRPC calls
         evaluateOptions: () => {
             return { deadline: Date.now() + 5000 }; // 5 seconds
@@ -80,7 +80,7 @@ async  newGatewayConnection(client) {
     });
 }
 
- newIdentity() {
+  newIdentity() {
     return new Promise(async (resolve, reject) => {
         try {
             const credentials = await fs.readFile(certPath);

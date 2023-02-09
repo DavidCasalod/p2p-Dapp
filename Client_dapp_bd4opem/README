@@ -4,3 +4,10 @@ nodemon --exec npm start app.js
 front end:
 src/app
 ng serve  
+
+sudo ./network.sh up createChannel -c mychannel -ca
+
+
+sudo ./network.sh up createChannel -ca -s couchdb
+
+sudo ./network.sh deployCC -ccn CEC-Contract -ccp ../chaincode/cecContract/ -ccl javascript -ccep "OR('Org1MSP.peer','Org2MSP.peer')" -cccg ../chaincode/cecContract/collections.json

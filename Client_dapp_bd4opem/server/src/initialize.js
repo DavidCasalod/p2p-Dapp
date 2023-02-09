@@ -8,6 +8,9 @@
 const ConnectService = require('./connection');
 const _connect = new ConnectService();
 
+const {CHANNEL_NAME,CHAINCODE_NAME} = require('./config');
+
+
    // prueba
   /**
  * Clean the string removing escape sequences
@@ -34,7 +37,7 @@ class InitializeService {
   * 
   **/
 
-   async  startCec(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version, conctractedByEmail, tradingParams) {
+   async  startCec(cecContractId , contractedByByOrgI, contractStart, contractEnd, state, algorithm, version, conctractedByEmail, tradingParams) {
     //
     try {
 
@@ -82,12 +85,14 @@ class InitializeService {
         var tradingParams_string = JSON.stringify(tradingParams);
         var tradingParams_cleand = await cleanString(tradingParams_string)
         //cecTradingParams as UTF-8 buffer
-        const tradingParamsBuffer = Buffer.from(tradingParams_cleand, 'utf8');
+        const tradingParamsBuffer = Buffer.from(tradingParams_cleand);
         //map with key as string and buffer as values
         const transientMap = {
-          contractedByEmail: contractedByEmailBuffer,
-          cecTradingParams: tradingParamsBuffer
+          contractedByEmail: conctractedByEmail,
+          cecTradingParams: tradingParams_cleand
         };
+        const transientMapjson = JSON.stringify(transientMap);
+
 
         console.log(tradingParams)
         console.log(tradingParamsBuffer)
@@ -97,21 +102,27 @@ class InitializeService {
         // .setTransient(transientMap)
         // .submit(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
         // console.log('Transaction has been submitted');
+        try {
+          await contract.submitTransaction('startCecContract', 
+          cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version,
+          {transientData:[
+              transientMapjson
+              ]});
+          gateway.close();
+          console.log('No error, startCec done');
 
-        await contract.submitTransaction('startCecContract', 
-        cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version,{
-          transientMap: {
-            transientMap
-          }
-      });
-        // Disconnect from the gateway.
-        gateway.disconnect();
+      }catch (error) {
+            console.log('caught the ERROR: \n', error);
+            gateway.close();
+            return error
+    }
+    
     
       } catch (error) {
         console.error('Failed to submit transaction:',error);
         process.exit(1);
       }
-      return 'Transaction has been submitted'
+     
     }
     
  }

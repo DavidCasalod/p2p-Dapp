@@ -39,7 +39,10 @@ const P2P_DAPP_PEER_ENDPOINT = "localhost:7051";
 
 const P2P_DAPP_OVERRIDE_AUTH = "peer0.org1.example.com";
 
-const P2P_DAPP_SAMPLE_PATH = "..//..//fabric-samples";
+// const P2P_DAPP_SAMPLE_PATH = "..//..//fabric-samples";
+// const P2P_DAPP_SAMPLE_PATH = "//wsl.localhost/Ubuntu-20.04/home/davidatos/go/src/github.com/david.casalod/fabric-samples";
+const P2P_DAPP_SAMPLE_PATH = "/Users/a836280/go/src/github.com/david/fabric-samples";
+// const P2P_DAPP_SAMPLE_PATH = "/home/davidatos/go/src/github.com/david.casalod/fabric-samples"
 
 module.exports = {
   CHANNEL_NAME,

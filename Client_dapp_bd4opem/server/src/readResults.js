@@ -16,7 +16,7 @@ class ReadService {
   * 4. Construct request to makeEquipment
   * 5. Submit invoke makeEquipment transaction
   * 6. Process response
-  * 
+  *: 
   * 
   **/
   async readCec(cecContractId, date) {
@@ -43,7 +43,10 @@ class ReadService {
 
         // NEW GATEAWAY
 
+        // alert("current directory:" + path.basename(path.resolve()));
+        // console.log(path.basename(path.resolve()));
         await _connect.displayInputParameters();
+
 
         // The gRPC client connection should be shared by all Gateway connections to this endpoint.
     

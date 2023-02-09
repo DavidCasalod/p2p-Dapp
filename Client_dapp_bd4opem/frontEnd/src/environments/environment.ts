@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   marketplaceUrl: "https://marketplace.bd4opem.eu",
   loginReturnUrl: "testservice.bd4opem.eu:4200" ,
   apiUrl: "/api/"
