@@ -88,8 +88,8 @@ class InitializeService {
         const tradingParamsBuffer = Buffer.from(tradingParams_cleand);
         //map with key as string and buffer as values
         const transientMap = {
-          contractedByEmail: conctractedByEmail,
-          cecTradingParams: tradingParams_cleand
+          contractedByEmail: contractedByEmailBuffer,
+          cecTradingParams: tradingParamsBuffer
         };
         const transientMapjson = JSON.stringify(transientMap);
 
@@ -97,17 +97,18 @@ class InitializeService {
         console.log(tradingParams)
         console.log(tradingParamsBuffer)
       
+      
+        const args = [cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version];
+
+     
 
         // await contract.createTransaction("startCecContract")
         // .setTransient(transientMap)
         // .submit(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
         // console.log('Transaction has been submitted');
+        //PROBAR ESTO PRIMERO
         try {
-          await contract.submitTransaction('startCecContract', 
-          cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version,
-          {transientData:[
-              transientMapjson
-              ]});
+          await contract.submitTransaction("startCecContract", ...args, {transientMap: transientMap});
           gateway.close();
           console.log('No error, startCec done');
 
@@ -149,3 +150,7 @@ module.exports = InitializeService;
         //     }
         //   ]
         // };
+
+
+
+        
