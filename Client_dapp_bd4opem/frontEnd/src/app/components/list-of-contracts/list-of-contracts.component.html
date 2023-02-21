@@ -62,10 +62,10 @@
             <tr>
                 <th> Status </th>
                 <td>
-                  <p style="color:MediumSeaGreen;" (click)="initialise(contract)" *ngIf="check">Active  &#x25CF;</p>
+                  <p style="color:MediumSeaGreen;" (click)="initialise()" *ngIf="check">Active  &#x25CF;</p>
                   <p style="color:rgb(180, 41, 41);" *ngIf="contract.status! !== 'Active' && !check">Inactive</p>
                 </td>
-                <td> <button style="color: blue;" (click)="initialise(contract)" > Initialise </button></td>
+                <td> <button style="color: blue;" (click)="initialise()" > Initialise </button></td>
             </tr>
             <tr>
               <td>

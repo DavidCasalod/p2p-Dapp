@@ -62,10 +62,7 @@ class ReadService {
         const contract = network.getContract(CHAINCODE_NAME);
 
         // Submit the specified transaction.
-        // const resultBuffer = await contract.submitTransaction("getCECtradingResults")
-        // .setTransient('')
-        // .submit(cecContractId,date);
-        // const resultBuffer = await contract.submitTransaction("getCECtradingResults")
+   
         try {
           const resultBuffer = await contract.submitTransaction(
               'getCECtradingResults',
@@ -74,23 +71,16 @@ class ReadService {
           );
           let result =  resultBuffer.toString();
           console.log('No error');
-          gateway.disconnect();
+          gateway.close();
           return result;
           
       } catch (error) {
           console.log('caught the ERROR: \n', error);
-          gateway.disconnect();
+          gateway.close();
           return error
       }
 
-        // console.log('Transaction read read has been submitted');
-        
-        // let result =  resultBuffer.toString();
-        
-    
-        // Disconnect from the gateway.
-        
-        // return result;
+      
         
       } catch (error) {
         console.error('Failed to submit transaction:',error);
@@ -98,8 +88,6 @@ class ReadService {
       }
     }
  }
-  // prueba
-  //void startCec();
 
 module.exports = ReadService;
 

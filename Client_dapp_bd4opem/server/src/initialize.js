@@ -17,13 +17,18 @@ const {CHANNEL_NAME,CHAINCODE_NAME} = require('./config');
  * @param {String} string to clean
  * @returns {String} string cleaned
  */
-   async function cleanString(string) {
-    string.replace("\\n", "");
-    string.replace("\\r", "");
-    string.replace("\\t", "");
-    string.replace("\\", "");
-    return string;
+  //  async function cleanString(string) {
+  //   string.replace("\\n", "");
+  //   string.replace("\\r", "");
+  //   string.replace("\\t", "");
+  //   string.replace("\\", "");
+  //   return string;
+  // }
+
+  async function cleanString(string) {
+    return string.replace(/[\n\r\t\\]/g, '');
   }
+
   
 class InitializeService {
   /**
@@ -78,37 +83,36 @@ class InitializeService {
         // Get the contract from the network.
         const contract = network.getContract(CHAINCODE_NAME);
 
-    
+        
         // Submit the specified transaction.
-        const contractedByEmailBuffer = Buffer.from(conctractedByEmail);
+        const contractedByEmailBuffer = Buffer.from(conctractedByEmail, 'utf-8');;
+        
         //trading params
+        
         var tradingParams_string = JSON.stringify(tradingParams);
-        var tradingParams_cleand = await cleanString(tradingParams_string)
+        var tradingParams_cleaned = await cleanString(tradingParams_string)
+
         //cecTradingParams as UTF-8 buffer
-        const tradingParamsBuffer = Buffer.from(tradingParams_cleand);
+        const tradingParamsBuffer = Buffer.from(tradingParams_cleaned, 'utf-8');
         //map with key as string and buffer as values
         const transientMap = {
-          contractedByEmail: contractedByEmailBuffer,
-          cecTradingParams: tradingParamsBuffer
+          contractedByEmail: conctractedByEmail,
+          cecTradingParams: tradingParams_cleaned
         };
         const transientMapjson = JSON.stringify(transientMap);
-
-
+       
         console.log(tradingParams)
-        console.log(tradingParamsBuffer)
-      
-      
-        const args = [cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version];
+        console.log(tradingParams_string)
+        console.log(tradingParams_cleaned)
 
-     
-
-        // await contract.createTransaction("startCecContract")
-        // .setTransient(transientMap)
-        // .submit(cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
-        // console.log('Transaction has been submitted');
-        //PROBAR ESTO PRIMERO
         try {
-          await contract.submitTransaction("startCecContract", ...args, {transientMap: transientMap});
+          await contract.submit("startCecContract", 
+          {arguments: [cecContractId, contractedByByOrgI, contractStart, contractEnd, state, algorithm, version], 
+          transientData: { 
+            contractedByEmail: conctractedByEmail,
+            cecTradingParams: tradingParams_cleaned
+          }});
+
           gateway.close();
           console.log('No error, startCec done');
 

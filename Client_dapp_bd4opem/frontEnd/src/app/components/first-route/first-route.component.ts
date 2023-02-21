@@ -54,12 +54,3 @@ export class FirstRouteComponent implements OnInit {
 
 
 }
-
-// {
-//   if(this.addForm.valid){
-//     console.log(this.addForm.value);
-//     const data = this.addForm.value;
-//     const headers=new HttpHeaders({'Content-Type':'application/json'});
-//     this.httpClient.post("http://localhost:3000/ping",data,{ headers });
-//   }
-// }

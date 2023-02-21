@@ -38,9 +38,10 @@ export class StartCecService {
   }
 
   initialize_oracle(contract: ReturnContract): Observable<Object>{
-  
+    console.log(contract)
     return this.httpClient.post(this.URL_SERVER + '/serviceSettings_2', contract).pipe(
         tap((res: any) => {
+         
           console.log(res)
         }
         )

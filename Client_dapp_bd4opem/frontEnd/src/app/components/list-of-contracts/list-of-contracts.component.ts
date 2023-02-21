@@ -306,10 +306,10 @@ export class ListOfContractsComponent implements OnInit {
     modalRef.componentInstance.selectedContract = this.selectedContract;
 	}
 
-  initialise( contract:ReturnContract) {
+  initialise( ) {
 
     this.check = true;
-      this.startcecservice.initialize_oracle(contract).subscribe((res)=>{
+      this.startcecservice.initialize_oracle(this.selectedContract).subscribe((res)=>{
         console.log(res);
       }
       )
