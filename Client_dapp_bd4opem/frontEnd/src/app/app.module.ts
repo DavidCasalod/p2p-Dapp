@@ -11,8 +11,6 @@ import { HeaderComponent } from './components/adminLTE/header/header.component';
 import { SidebarComponent } from './components/adminLTE/sidebar/sidebar.component';
 import { FirstRouteComponent } from './components/first-route/first-route.component';
 import { ReadComponent } from './components/read/read.component';
-import { CalculateComponent } from './components/calculate/calculate.component';
-import { QueryComponent } from './components/query/query.component';
 import { AuthGuardModalComponent } from './components/auth-guard-modal/auth-guard-modal.component';
 import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
 import { ContractService } from './services/contract.service';
@@ -28,8 +26,6 @@ import { MatButtonModule } from '@angular/material/button';
     FooterComponent,
     FirstRouteComponent,
     ReadComponent,
-    QueryComponent,
-    CalculateComponent,
     AuthGuardModalComponent,
     ListOfContractsComponent,
    
