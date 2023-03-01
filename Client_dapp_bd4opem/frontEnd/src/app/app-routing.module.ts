@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QueryComponent } from './components/query/query.component';
 import { FirstRouteComponent } from './components/first-route/first-route.component';
 import { ReadComponent } from './components/read/read.component';
-import { CalculateComponent } from './components/calculate/calculate.component';
 import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
 import { AuthGuard } from './guards/auth.guard';
 

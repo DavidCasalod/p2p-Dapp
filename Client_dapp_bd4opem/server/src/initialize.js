@@ -86,20 +86,18 @@ class InitializeService {
         
         // Submit the specified transaction.
         const contractedByEmailBuffer = Buffer.from(conctractedByEmail, 'utf-8');;
-        
-        //trading params
-        
+        //cecTradingParams as UTF-8 buffer
+        const tradingParamsBuffer = Buffer.from(tradingParams_cleaned, 'utf-8');
+       
+        //trading params 
         var tradingParams_string = JSON.stringify(tradingParams);
         var tradingParams_cleaned = await cleanString(tradingParams_string)
 
-        //cecTradingParams as UTF-8 buffer
-        const tradingParamsBuffer = Buffer.from(tradingParams_cleaned, 'utf-8');
         //map with key as string and buffer as values
         const transientMap = {
           contractedByEmail: conctractedByEmail,
           cecTradingParams: tradingParams_cleaned
         };
-        const transientMapjson = JSON.stringify(transientMap);
        
         console.log(tradingParams)
         console.log(tradingParams_string)
