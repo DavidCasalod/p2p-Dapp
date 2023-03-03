@@ -3,16 +3,22 @@ services:
   angular:
     # image: <nexus-registry-url>/p2ptrading-app-angular
     image: p2ptrading-app-angular
-    environment:
-      - VIRTUAL_PORT=80
-      - VIRTUAL_HOST=testservice.bd4opem.eu
-     
-
+    
     ports:
-      - "80:80"
+      - "4200:80"
+     environment:
+        - VIRTUAL_HOST=my_container_name.bip.bd4opem.ari-energy.eu
+        - LETSENCRYPT_HOST=my_container_name.bip.bd4opem.ari-energy.eu
+        - VIRTUAL_PORT=inbound_port
+    
+    networks:
+       - bd4opem_net
   server:
     # image: <nexus-registry-url>/p2ptrading-app-server
     image: p2ptrading-app-server
      
     ports:
       - "3000:3000"
+networks: 
+  bd4opem_net:
+   external: true
