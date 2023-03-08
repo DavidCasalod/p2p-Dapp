@@ -10,6 +10,7 @@ services:
         - VIRTUAL_HOST=my_container_name.bip.bd4opem.ari-energy.eu
         - LETSENCRYPT_HOST=my_container_name.bip.bd4opem.ari-energy.eu
         - VIRTUAL_PORT=inbound_port
+        - AUTH_TOKEN=${AUTH_TOKEN}
     
     networks:
        - bd4opem_net

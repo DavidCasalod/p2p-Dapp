@@ -6,7 +6,8 @@ export const environment = {
   production: true,
   marketplaceUrl: "https://marketplace.bd4opem.eu",
   loginReturnUrl: "testservice.bd4opem.eu:4200" ,
-  apiUrl: "/api/"
+  apiUrl: "/api/",
+  authToken: process.env["AUTH_TOKEN"]
 };
 
 /*
