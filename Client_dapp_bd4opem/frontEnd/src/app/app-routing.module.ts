@@ -5,11 +5,15 @@ import { ReadComponent } from './components/read/read.component';
 import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
 import { AuthGuard } from './guards/auth.guard';
 
+// AuthGuard
 const routes: Routes = [
   { path: '', pathMatch: 'full',  redirectTo: 'service'},
-  { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
-  { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
-  { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },
+  // { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
+  // { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
+  // { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },
+ { path: 'service', component:FirstRouteComponent},
+  { path: 'read', component: ReadComponent },
+  { path: 'test', component: ListOfContractsComponent},
 
 
   // { path: 'text', component:Component } 

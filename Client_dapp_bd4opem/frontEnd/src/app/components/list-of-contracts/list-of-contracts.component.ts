@@ -6,8 +6,7 @@ import { ContractService } from '../../services/contract.service';
 import { ReturnContract } from 'src/app/models/returnContract';
 import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { StartCecService } from 'src/app/services/start-cec.service';
-// import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-
+import * as process from 'process';
 export interface SSITokenDecoded {
   aud: string;
   exp: number;
@@ -23,36 +22,7 @@ export interface SSITokenDecoded {
   connectionID: string;
   accountID : string;
 }
-// @Component({
-//   selector: 'app-dialog',
-//   template: `
 
-//   <div class="modal-header">
-//   <div mat-dialog-content>
-//     <p>The P2P Trading Smart Contract has been successfully started</p>
-//   </div>
-//   <div mat-dialog-actions>
-//     <button mat-button (click)="onNoClick()">Close</button>
-//   </div>
-//   </div>
-//   `
-//   ,
-//   styles:  [
-//         `
-//         .light-blue-backdrop {
-//           background-color: #5cb3fd;
-//         }
-//       `,
-//     ],
-//   encapsulation: ViewEncapsulation.None
-// })
-// export class DialogComponent {
-//   constructor(public dialogRef: MatDialogRef<DialogComponent>) {}
-  
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
 
 @Component({
 	selector: 'ngbd-modal-content',
@@ -169,6 +139,9 @@ export class ListOfContractsComponent implements OnInit {
   formBuilder: any;
   check: boolean = false;
 
+  //Added for tests hardcoded coockie.
+  authToken = process.env['AUTH_TOKEN'];
+  
   constructor(private cookieService: CookieService,
     private contractservice: ContractService,
     private modalService: NgbModal,
@@ -177,7 +150,8 @@ export class ListOfContractsComponent implements OnInit {
 
     async ngOnInit():  Promise<string> {
  
-    this.token = this.cookieService.get('authentication');
+    // this.token = this.cookieService.get('authentication');
+    this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
           this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
@@ -215,7 +189,8 @@ export class ListOfContractsComponent implements OnInit {
     this.contract = contract;
     this.contract_ID = contract.contractID;
     this.contract_ID_du = contract?.data_parameters?.[0].contractID!;
-    this.token = this.cookieService.get('authentication');
+    // this.token = this.cookieService.get('authentication');
+    this.token = this.authToken!
     console.log(this.token);
     this.contractservice.fetchContract(this.token, contract?.data_parameters?.[0].contractID!).subscribe(
       response => {
@@ -253,7 +228,8 @@ export class ListOfContractsComponent implements OnInit {
     this.contract = contract;
     this.contract_ID = contract.contractID;
     this.contract_ID_du = contract?.data_parameters?.[0].contractID!;
-    this.token = this.cookieService.get('authentication');
+    // this.token = this.cookieService.get('authentication');
+    this.token = this.authToken!
     console.log(this.token);
     console.log(contract.status!);
     this.contractservice.fetchContract(this.token, contract.contractID!).subscribe(
