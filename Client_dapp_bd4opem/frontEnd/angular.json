@@ -72,10 +72,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "template-adminLte:build:production"
+              "browserTarget": "template-adminLte:build:production",
+              "proxyConfig": "src/proxy.conf.mjs"
             },
             "development": {
               "browserTarget": "template-adminLte:build:development",
+              "proxyConfig": "src/proxy.conf.mjs",
               "host": "testservice.bd4opem.eu",
               "port": 4200
             }

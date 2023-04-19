@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { tap } from  'rxjs/operators';
 import { Observable } from  'rxjs';
 
 import { TransactionArguments } from  '../models/transaction-arguments';
 import { ReturnContract } from '../models/returnContract';
-import { ContractService } from './contract.service';
-import { CookieService } from 'ngx-cookie-service';
-import jwtDecode from 'jwt-decode';
-import { SSITokenDecoded } from './authenticate.service';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,18 +14,28 @@ import { SSITokenDecoded } from './authenticate.service';
 
 export class StartCecService {
 
-  URL_SERVER = "http://localhost:3000"
+  // URL_SERVER = "http://localhost:3000"
+  URL_SERVER = environment.serverUrl;
   TransactionArguments!: ReturnContract;
   arguments!: TransactionArguments;
   SSIAuthentication: any;
   
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  })
+  options = {
+    headers: this.headers,
+  
+  };
+
 
   constructor(private httpClient: HttpClient) { }
     
 
   initialize(TransactionArguments: TransactionArguments): Observable<Object>{
 
-    return this.httpClient.post(this.URL_SERVER + '/serviceSettings', TransactionArguments).pipe(
+    return this.httpClient.post(this.URL_SERVER + '/serviceSettings', TransactionArguments, this.options).pipe(
       tap((res: any) => {
         console.log(res)
       }
@@ -39,7 +45,7 @@ export class StartCecService {
 
   initialize_oracle(contract: ReturnContract): Observable<Object>{
     console.log(contract)
-    return this.httpClient.post(this.URL_SERVER + '/serviceSettings_2', contract).pipe(
+    return this.httpClient.post(this.URL_SERVER + '/serviceSettings_2', contract, this.options).pipe(
         tap((res: any) => {
          
           console.log(res)

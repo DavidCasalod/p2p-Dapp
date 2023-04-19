@@ -7,6 +7,7 @@ import { ReturnContract } from 'src/app/models/returnContract';
 import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { StartCecService } from 'src/app/services/start-cec.service';
 import * as process from 'process';
+import { environment } from 'src/environments/environment';
 export interface SSITokenDecoded {
   aud: string;
   exp: number;
@@ -140,7 +141,7 @@ export class ListOfContractsComponent implements OnInit {
   check: boolean = false;
 
   //Added for tests hardcoded coockie.
-  authToken = process.env['AUTH_TOKEN'];
+  authToken = environment.authToken;
   
   constructor(private cookieService: CookieService,
     private contractservice: ContractService,
