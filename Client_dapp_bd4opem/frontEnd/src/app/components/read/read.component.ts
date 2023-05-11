@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReadCecService } from  '../../services/read-cec.service';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CalculateArguments } from 'src/app/models/calculate-arguments';
 import { JsonConvertService } from  '../../services/json-convert.service';
@@ -42,14 +42,14 @@ export class ReadComponent implements OnInit {
   authToken = environment.authToken;
 
   constructor(private readcecservice: ReadCecService, 
-              private router: Router,private formBuilder: FormBuilder,
+              private router: Router,private formBuilder: UntypedFormBuilder,
               private jsonConvertservice : JsonConvertService,
               private contractservice: ContractService,
              ) { }
   
-  addForm = new FormGroup({
-    contractId: new FormControl('', Validators.required),
-    date: new FormControl('', Validators.required)
+  addForm = new UntypedFormGroup({
+    contractId: new UntypedFormControl('', Validators.required),
+    date: new UntypedFormControl('', Validators.required)
   });
 
   async ngOnInit():  Promise<string> {
