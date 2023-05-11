@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { forkJoin, last, lastValueFrom, observable, Observable, of, Subscriber } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import jwtDecode from 'jwt-decode';
