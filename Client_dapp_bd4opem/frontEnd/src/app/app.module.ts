@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule} from '@angular/material/dialog';
+import { MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './components/adminLTE/content/content.component';
