@@ -9,14 +9,21 @@
       <input type="text" class="form-control" formControlName="date" id="date" aria-describedby="date" placeholder=" year month 2020-12">
     </div>
   <button type="submit" [disabled]="!addForm.valid" class="btn btn-danger">Submit</button>
-
+<br>
   <div class="form-group col-md-12">
-    <label for="exampleInputEmail1">Your results are available to download:</label>
+    <label for="exampleInputEmail1">Download your results</label>
+    <br>
     <button (click)="download()"> Download csv</button>
-    <!-- <div class="row">
-      <pre [innerHTML]="results | json">
-        <td>{{ results }}</td>  
-      </pre>
-    </div>   -->
   </div> 
 </form>
+<br>
+<h4>CEC Contract Id:</h4>
+<mat-form-field appearance="fill">
+  <mat-label>contrcact id</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let contract of Contracts" >
+      <p *ngIf="contract.status! === 'Active'" >{{ contract.contractID! }}</p>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

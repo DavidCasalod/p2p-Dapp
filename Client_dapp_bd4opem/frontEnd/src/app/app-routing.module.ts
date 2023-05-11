@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FirstRouteComponent } from './components/first-route/first-route.component';
 import { ReadComponent } from './components/read/read.component';
 import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -11,7 +10,6 @@ const routes: Routes = [
   // { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
   // { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
   // { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },
- { path: 'service', component:FirstRouteComponent},
   { path: 'read', component: ReadComponent },
   { path: 'test', component: ListOfContractsComponent},
 

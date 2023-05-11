@@ -8,32 +8,28 @@
             <th>Service User Contract ID</th>
             <th>Name</th>
             <!-- <th>Algorithm</th> -->
-            <th>Status</th>
+            <th>Contract Status</th>
             <th>Execution status</th>
           </tr>
       </thead>
       <tbody *ngFor="let contract of Contracts; let i = index ">
           <tr>
-            <!-- <button class="button button2" (click)="enableDisableRule()"
-                [ngClass]="{'blue' : toggle, 'green': !toggle}" (click)="onSelect(contract)">
-                  <td>{{ status }}</td>
-                </button>  -->
-            <button class="button button2"  (click)="onSelect(contract)">
-                <td> Manage </td>
+            <button *ngIf="contract.status! === 'Active'" class="button button2"  (click)="onSelect(contract)">
+                <td *ngIf="contract.status! === 'Active'"> Manage </td>
             </button>
-            <td>{{ contract.contractID! }}</td>
+            <td *ngIf="contract.status! === 'Active'" >{{ contract.contractID! }}</td>
             <ng-container *ngFor="let data_parameters of contract.data_parameters; let z = index">
-                <td>{{ contract.business_parameters?.contractName! }}</td>
+                <td *ngIf="contract.status! === 'Active'">{{ contract.business_parameters?.contractName! }}</td>
             </ng-container>
-            <td>{{ contract.status! }}</td>
-            <td>
+            <td *ngIf="contract.status! === 'Active'">{{ contract.status! }}</td>
+            <td *ngIf="contract.status! === 'Active'" >
                 <div>
-                  <p style="color:MediumSeaGreen;" *ngIf="contract.status! === 'Active'">Active  &#x25CF;</p>
-                  <p *ngIf="contract.status! !== 'Active'">Inactive</p>
+                  <p style="color:MediumSeaGreen;" *ngIf="check">Running  &#x25CF;</p>
+                  <p *ngIf="!check">Not running</p>
                 </div>
             </td>
           </tr>
-      </tbody>
+        </tbody>
     </table>
     <br>
     <br>

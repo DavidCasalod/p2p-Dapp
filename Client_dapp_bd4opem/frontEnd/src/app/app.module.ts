@@ -9,14 +9,13 @@ import { ContentComponent } from './components/adminLTE/content/content.componen
 import { FooterComponent } from './components/adminLTE/footer/footer.component';
 import { HeaderComponent } from './components/adminLTE/header/header.component';
 import { SidebarComponent } from './components/adminLTE/sidebar/sidebar.component';
-import { FirstRouteComponent } from './components/first-route/first-route.component';
 import { ReadComponent } from './components/read/read.component';
 import { AuthGuardModalComponent } from './components/auth-guard-modal/auth-guard-modal.component';
 import { ListOfContractsComponent } from './components/list-of-contracts/list-of-contracts.component';
 import { ContractService } from './services/contract.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,6 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    FirstRouteComponent,
     ReadComponent,
     AuthGuardModalComponent,
     ListOfContractsComponent,

@@ -277,7 +277,6 @@ export class ListOfContractsComponent implements OnInit {
         size: 'xl',
         centered: true  });
     modalRef.componentInstance.args = this.arguments;
-		// modalRef.componentInstance.c = this.c;
     modalRef.componentInstance.contract_s = this.contract_ID;
     modalRef.componentInstance.contract_id_dataUser = this.contract_ID_du;
     modalRef.componentInstance.selectedContract = this.selectedContract;
@@ -286,6 +285,7 @@ export class ListOfContractsComponent implements OnInit {
   initialise( ) {
 
     this.check = true;
+    this.selectedContract.contractID = this.contract.contractID
       this.startcecservice.initialize_oracle(this.selectedContract).subscribe((res)=>{
         console.log(res);
       }
@@ -297,17 +297,7 @@ export class ListOfContractsComponent implements OnInit {
     console.log(this.selectedAlg);
     
   }
-  // openDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.position = 'center';
 
-  //   const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log(`Dialog result: ${result}`);
-  //   });
-  // }
 }
 
 
