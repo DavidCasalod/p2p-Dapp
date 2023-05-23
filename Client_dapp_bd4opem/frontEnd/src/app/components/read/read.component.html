@@ -1,9 +1,27 @@
 
 <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
+
     <div class="form-group col-md-6">
       <label for="exampleInputEmail1">CEC Contract Id:</label>
-      <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Cec contract id">
+      <br>
+      <div *ngIf="SSIAuthentication.userType[0]=== 'DataProvider'; else elseBlock" >
+        <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Cec contract id">    
+      </div>
+      <ng-template #elseBlock>
+        <mat-form-field appearance="fill">
+          <mat-label>contract id</mat-label>
+          <mat-select class="form-control" formControlName="contractId">
+            <ng-container *ngFor="let contract of Contracts">
+              <mat-option *ngIf="contract.status! === 'Active'" [value]="contract.contractID!">
+                {{ contract.contractID! }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>  
+      </ng-template>
+
     </div>
+
     <div class="form-group col-md-6">
       <label for="exampleInputEmail1">Year month:</label>
       <input type="text" class="form-control" formControlName="date" id="date" aria-describedby="date" placeholder=" year month 2020-12">
@@ -17,13 +35,5 @@
   </div> 
 </form>
 <br>
-<h4>CEC Contract Id:</h4>
-<mat-form-field appearance="fill">
-  <mat-label>contrcact id</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let contract of Contracts" >
-      <p *ngIf="contract.status! === 'Active'" >{{ contract.contractID! }}</p>
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+
 

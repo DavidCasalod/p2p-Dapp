@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { ReadCecService } from  '../../services/read-cec.service';
 import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './read.component.html',
   styleUrls: ['./read.component.css']
 })
+
 export class ReadComponent implements OnInit {
   results!: CalculateArguments[];
   Contracts!: ReturnContract[] ;
@@ -89,12 +90,14 @@ export class ReadComponent implements OnInit {
           },
           
           ); 
+
     return this.Contracts, this.message
  }
    
 
 
   onSubmit(addForm: { value: any; }) {
+    console.log("esto buscas:", this.addForm)
     this.readcecservice.getResults(addForm.value).subscribe((res)=>{
       this.router.navigateByUrl('read');
       console.log("RESULTADO =")

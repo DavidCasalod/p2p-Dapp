@@ -142,6 +142,7 @@ export class ListOfContractsComponent implements OnInit {
 
   //Added for tests hardcoded coockie.
   authToken = environment.authToken;
+  status_contract: any;
   
   constructor(private cookieService: CookieService,
     private contractservice: ContractService,
@@ -152,12 +153,16 @@ export class ListOfContractsComponent implements OnInit {
     async ngOnInit():  Promise<string> {
  
     // this.token = this.cookieService.get('authentication');
+ 
     this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
           this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
             response => {
             this.Contracts = response;
+            for (let contract of this.Contracts) {
+              this.check_exist(contract);
+            }
             this.c = JSON.stringify(this.Contracts)
             console.log(JSON.stringify(this.Contracts));
           },
@@ -181,7 +186,8 @@ export class ListOfContractsComponent implements OnInit {
             }
           },
           
-          ); 
+          );
+          
     return this.Contracts, this.message
  }
  onSelect(contract: ReturnContract) {
@@ -297,6 +303,13 @@ export class ListOfContractsComponent implements OnInit {
     console.log(this.selectedAlg);
     
   }
+
+  async check_exist(contract: ReturnContract):Promise<any> {
+    this.startcecservice.exist(contract.contractID!).subscribe((status_contract)=>{
+        console.log(status_contract);
+        this.status_contract = status_contract;
+    });
+}
 
 }
 

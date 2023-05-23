@@ -24,8 +24,8 @@
             <td *ngIf="contract.status! === 'Active'">{{ contract.status! }}</td>
             <td *ngIf="contract.status! === 'Active'" >
                 <div>
-                  <p style="color:MediumSeaGreen;" *ngIf="check">Running  &#x25CF;</p>
-                  <p *ngIf="!check">Not running</p>
+                  <p style="color:MediumSeaGreen;" *ngIf="status_contract === 'Running'" >Running  &#x25CF;</p>
+                  <p  *ngIf="status_contract !== 'Running'">Not running</p>
                 </div>
             </td>
           </tr>

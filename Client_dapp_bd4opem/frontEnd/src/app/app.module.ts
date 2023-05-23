@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './components/adminLTE/content/content.component';
@@ -15,6 +14,8 @@ import { ListOfContractsComponent } from './components/list-of-contracts/list-of
 import { ContractService } from './services/contract.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReadComponent,
     AuthGuardModalComponent,
     ListOfContractsComponent,
+ 
    
 
   ],
@@ -37,6 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
 
     
     

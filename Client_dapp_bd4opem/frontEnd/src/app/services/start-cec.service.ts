@@ -54,4 +54,14 @@ export class StartCecService {
       );
     }
     
+    
+  exist(id: string): Observable<any>{
+
+    return this.httpClient.post(this.URL_SERVER + '/exist', id, this.options).pipe(
+      tap((res: any) => {
+        console.log(res)
+      }
+      )
+    );
+  }
   }
