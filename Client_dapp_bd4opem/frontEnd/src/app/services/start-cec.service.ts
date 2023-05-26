@@ -21,8 +21,7 @@ export class StartCecService {
   SSIAuthentication: any;
   
   headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Content-Type': 'application/json'
   })
   options = {
     headers: this.headers,

@@ -29,7 +29,7 @@
  @Injectable()
  export class ContractService {
  
-     protected basePath = 'https://account.bip.bd4opem.ari-energy.eu';
+     protected basePath = 'https://ssi-account.aks-marketplace.bd4opem.eu';
      public defaultHeaders = new HttpHeaders();
      public configuration = new Configuration();
  

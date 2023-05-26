@@ -1,25 +1,35 @@
-version: '3'
+version: '3.5'
+
+
 services:
-  angular:
-    # image: <nexus-registry-url>/p2ptrading-app-angular
-    image: p2ptrading-app-angular
-    
-    ports:
-      - "4200:80"
-     environment:
-        - VIRTUAL_HOST=my_container_name.bip.bd4opem.ari-energy.eu
-        - LETSENCRYPT_HOST=my_container_name.bip.bd4opem.ari-energy.eu
-        - VIRTUAL_PORT=inbound_port
-        - AUTH_TOKEN=${AUTH_TOKEN}
-    
+
+  p2ptrading-app:
+    image: registry.atosresearch.eu:18473/bd4opem/p2ptrading/p2ptrading-app-angular:test_v2
+
+    environment:
+      - VIRTUAL_HOST=p2ptrading-app
+      # - LETSENCRYPT_HOST=p2ptrading-app.dev4.ari-bip.eu
+      - VIRTUAL_PORT=80
+      #- SERVER_URL=http://p2ptrading-server.bip.bd4opem.ari-energy.eu
+
+#    volumes:
+       #- /xxx/yyy/data/proxy.conf.json:proxy.conf.json
     networks:
        - bd4opem_net
-  server:
-    # image: <nexus-registry-url>/p2ptrading-app-server
-    image: p2ptrading-app-server
-     
-    ports:
-      - "3000:3000"
-networks: 
+
+  p2ptrading-server:
+    image: registry.atosresearch.eu:18473/bd4opem/p2ptrading/p2ptrading-app-server:test_v2
+
+    environment:
+      - VIRTUAL_HOST=p2ptrading-server
+        # - LETSENCRYPT_HOST=p2ptrading-server.bip.bd4opem.ari-energy.eu
+      - VIRTUAL_PORT=3000
+    volumes:
+      - /home/david.casalod/go/src/github.com/david/fabric-samples:/home/david.casalod/go/src/github.com/david/fabric-samples
+
+    networks:
+       - bd4opem_net
+networks:
   bd4opem_net:
    external: true
+

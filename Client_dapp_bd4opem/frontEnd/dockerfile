@@ -1,6 +1,6 @@
 #Descomentar app-routing.module.ts canActivate[AuthGuard]
 
-FROM node:14-alpine as node
+FROM node:16-alpine as node
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json /app/package.json

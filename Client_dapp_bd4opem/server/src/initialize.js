@@ -84,21 +84,13 @@ class InitializeService {
         const contract = network.getContract(CHAINCODE_NAME);
 
         
-        // Submit the specified transaction.
-        const contractedByEmailBuffer = Buffer.from(conctractedByEmail, 'utf-8');;
-        //cecTradingParams as UTF-8 buffer
-        const tradingParamsBuffer = Buffer.from(tradingParams_cleaned, 'utf-8');
        
         //trading params 
         var tradingParams_string = JSON.stringify(tradingParams);
         var tradingParams_cleaned = await cleanString(tradingParams_string)
 
         //map with key as string and buffer as values
-        const transientMap = {
-          contractedByEmail: conctractedByEmail,
-          cecTradingParams: tradingParams_cleaned
-        };
-       
+     
         console.log(tradingParams)
         console.log(tradingParams_string)
         console.log(tradingParams_cleaned)
@@ -131,27 +123,6 @@ class InitializeService {
  }
 
 module.exports = InitializeService;
-
-
-  //await contract.submitTransaction('startCecContract', cecContractId, ctx.toString(), contractedByByOrgI, contractStart, contractEnd, state, algorithm, version);
-        //await contract.submitTransaction('startCecContract', "cecContractId", "contractedByByOrgI", "contractStart", "contractEnd", "state", "algorithm", "version");
-        // Create and submit transactions for the smart contract with transient data
-        // let ctx = { contractedByEmail: "ross.little@atos.net", cecTradingParams: [
-        //     {
-        //     "smartmeterId": "AAAe4567-e89b-12d3-a456-426614174555",
-        //     "algParams":[null]
-        //     },
-        //     {
-        //       "smartmeterId": "BBBe4567-e89b-12d3-a456-426614174555",
-        //       "algParams":[null]
-
-        //      },
-        //      {
-        //       "smartmeterId": "CCC4567-e89b-12d3-a456-426614174555",
-        //       "algParams":[null]
-        //     }
-        //   ]
-        // };
 
 
 

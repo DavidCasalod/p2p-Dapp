@@ -23,5 +23,11 @@ export default {
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/exist": {
+    "target": "http://p2ptrading-server.bip.bd4opem.ari-energy.eu",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 };

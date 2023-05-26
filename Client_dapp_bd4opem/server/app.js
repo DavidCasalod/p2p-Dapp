@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var serviceSettingsRouter = require('./routes/serviceSettings');
 var serviceSettingsRouter_2 = require('./routes/serviceSettings_2');
 var readResultsRouter = require('./routes/read');
+var existRouter = require('./routes/exist');
 
 var cors = require('cors');
 
@@ -23,20 +24,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// var corsOptions = {
+//   origin: 'http://localhost:4200',
+//   methods: 'GET,PUT,POST,DELETE,OPTIONS',
+//   allowedHeaders: 'Content-Type, Authorization, Content-Length, X-Requested-With, Access-Control-Allow-Origin'
+// };
 
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/serviceSettings', serviceSettingsRouter);
 app.use('/serviceSettings_2', serviceSettingsRouter_2);
 app.use('/read', readResultsRouter);
+app.use('/exist', existRouter);
 
 
-app.all("/*", function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  next();
-});
 
 app.post('/ping', function (req, res) {
   res.send(req.body);

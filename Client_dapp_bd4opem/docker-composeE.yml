@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-data/certs:/etc/nginx/certs
+      - ./nginx-data/conf.d:/etc/nginx/conf.d
+      - ./nginx-data/vhost.d:/etc/nginx/vhost.d
+      - ./nginx-data/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  nginx-letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme:/etc/acme.sh
+    environment:
+      #- DEFAULT_EMAIL=angel.palomares@atos.net
+      - DEFAULT_EMAIL=david.casalod@atos.net
+    volumes_from:
+      - nginx-proxy
+
+  portainer:
+    image: portainer/portainer-ce:2.11.1
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    environment:
+      #- VIRTUAL_HOST=docker.preprod.ari-bip.eu
+      - VIRTUAL_HOST=docker.dev4.ari-bip.eu
+      #- LETSENCRYPT_HOST=docker.preprod.ari-bip.eu
+      - LETSENCRYPT_HOST=docker.dev4.ari-bip.eu
+      - VIRTUAL_PORT=9000
+    #ports:
+    # - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+  
+networks: 
+  default: 
+    external: 
+      name: bd4opem_net
+
