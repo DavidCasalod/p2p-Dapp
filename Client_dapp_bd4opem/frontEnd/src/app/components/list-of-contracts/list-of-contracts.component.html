@@ -23,10 +23,10 @@
             </ng-container>
             <td *ngIf="contract.status! === 'Active'">{{ contract.status! }}</td>
             <td *ngIf="contract.status! === 'Active'" >
-                <div>
-                  <p style="color:MediumSeaGreen;" *ngIf="status_contract === 'Running'" >Running  &#x25CF;</p>
-                  <p  *ngIf="status_contract !== 'Running'">Not running</p>
-                </div>
+              <div>
+                <p style="color:MediumSeaGreen;" *ngIf="status_contract[contract.contractID!] === 'Running'">Running  &#x25CF;</p>
+                <p *ngIf="status_contract[contract.contractID!] !== 'Running'">Not running</p>
+              </div>
             </td>
           </tr>
         </tbody>

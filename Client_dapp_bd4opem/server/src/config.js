@@ -26,7 +26,7 @@
 // export const P2P_DAPP_SAMPLE_PATH = "..//..//fabric-samples"
 // // //home//david.casalod//go//src//github.com//david.casalod//fabric-samples
 const CHANNEL_NAME =  'mychannel';
-const CHAINCODE_NAME = "CEC-Contract-New-Version";
+const CHAINCODE_NAME = "CEC-contract";
 const P2P_DAPP_NETWORK_NAME="test-network";
 
 const P2P_DAPP_ORG1MSP="Org1MSP";

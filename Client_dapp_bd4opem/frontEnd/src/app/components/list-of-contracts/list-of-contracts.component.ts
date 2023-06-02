@@ -142,7 +142,8 @@ export class ListOfContractsComponent implements OnInit {
 
   //Added for tests hardcoded coockie.
   authToken = environment.authToken;
-  status_contract: any;
+   status_contract: any = {};
+  //status_contract: string[] = [];
   
   constructor(private cookieService: CookieService,
     private contractservice: ContractService,
@@ -164,7 +165,7 @@ export class ListOfContractsComponent implements OnInit {
               this.check_exist(contract);
             }
             this.c = JSON.stringify(this.Contracts)
-            console.log(JSON.stringify(this.Contracts));
+            
           },
           
           (error) => {
@@ -296,6 +297,9 @@ export class ListOfContractsComponent implements OnInit {
         console.log(res);
       }
       )
+      setTimeout(() => {
+        window.location.reload();
+    }, 2000);
     }
   
   selectChangeHandler (event: any) {
@@ -305,9 +309,10 @@ export class ListOfContractsComponent implements OnInit {
   }
 
   async check_exist(contract: ReturnContract):Promise<any> {
-    this.startcecservice.exist(contract.contractID!).subscribe((status_contract)=>{
-        console.log(status_contract);
-        this.status_contract = status_contract;
+    this.startcecservice.exist(contract.contractID!).subscribe((response)=>{
+        console.log(response.status);
+        //this.status_contract = response.status;
+        this.status_contract[contract.contractID!] = response.status;
     });
 }
 

@@ -29,8 +29,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   methods: 'GET,PUT,POST,DELETE,OPTIONS',
 //   allowedHeaders: 'Content-Type, Authorization, Content-Length, X-Requested-With, Access-Control-Allow-Origin'
 // };
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 app.use('/', indexRouter);
 app.use('/serviceSettings', serviceSettingsRouter);
 app.use('/serviceSettings_2', serviceSettingsRouter_2);
@@ -59,7 +64,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { title: 'Error' });  // Modificación aquí
 });
 
 module.exports = app;

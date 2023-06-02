@@ -48,8 +48,9 @@ class ReadService {
               cecContractId,
               date,
           );
-          let result =  resultBuffer.toString();
-          console.log('No error');
+          let result =convertUint8ArrayToJson(resultBuffer) ;
+          console.log(result);
+          console.log(typeof result)
           gateway.close();
           return result;
           
@@ -70,3 +71,18 @@ class ReadService {
 
 module.exports = ReadService;
 
+
+
+async function convertUint8ArrayToJson(uint8Array) {
+  try {
+    const decoder = new TextDecoder('utf-8');
+    const jsonString = decoder.decode(uint8Array);
+    console.log('jsonString: ', jsonString)
+    const jsonObject = JSON.parse(jsonString);
+    console.log('jsonObject: ', jsonObject)
+    return jsonObject;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

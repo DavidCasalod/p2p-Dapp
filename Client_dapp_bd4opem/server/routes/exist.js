@@ -6,7 +6,9 @@ const existInstance = new ExistService();
 
 router.post('/', async(req, res, next) => {
     var cecContractId = req.body.contractId
-    console.log(cecContractId);
+    console.log(cecContractId)
+
+    console.log(req.body);
     try {
         if (!cecContractId) {
             return res.status(400).json({error: "Missing required fields"});

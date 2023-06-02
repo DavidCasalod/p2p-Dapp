@@ -112,13 +112,13 @@ async  newGatewayConnection(client) {
   displayInputParameters() {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(`mspId:             ${mspId}`);
-            console.log(`cryptoPath:        ${cryptoPath}`);
-            console.log(`keyDirectoryPath:  ${keyDirectoryPath}`);
-            console.log(`certPath:          ${certPath}`);
-            console.log(`tlsCertPath:       ${tlsCertPath}`);
-            console.log(`peerEndpoint:      ${peerEndpoint}`);
-            console.log(`peerHostAlias:     ${peerHostAlias}`);
+            // console.log(`mspId:             ${mspId}`);
+            // console.log(`cryptoPath:        ${cryptoPath}`);
+            // console.log(`keyDirectoryPath:  ${keyDirectoryPath}`);
+            // console.log(`certPath:          ${certPath}`);
+            // console.log(`tlsCertPath:       ${tlsCertPath}`);
+            // console.log(`peerEndpoint:      ${peerEndpoint}`);
+            // console.log(`peerHostAlias:     ${peerHostAlias}`);
             resolve();
         } catch (error) {
             reject(error);

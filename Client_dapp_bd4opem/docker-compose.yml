@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   p2ptrading-app:
-    image: registry.atosresearch.eu:18473/bd4opem/p2ptrading/p2ptrading-app-angular:local_VM
+    image: p2ptrading-app:prueba
     environment:
       - VIRTUAL_HOST=p2ptrading-app
       - VIRTUAL_PORT=80

@@ -97,16 +97,18 @@ export class ReadComponent implements OnInit {
 
 
   onSubmit(addForm: { value: any; }) {
-    console.log("esto buscas:", this.addForm)
+   
     this.readcecservice.getResults(addForm.value).subscribe((res)=>{
       this.router.navigateByUrl('read');
       console.log("RESULTADO =")
       console.log(res)
-      this.results = convertUint8ArrayToJson(res);
-      console.log(this.results)
+      console.log(typeof res)
+      this.results = res;
     } 
     )
   }
+  
+
   download(){
     console.log(this.results)
 
@@ -116,18 +118,4 @@ export class ReadComponent implements OnInit {
 
 }
 
- function convertUint8ArrayToJson(uint8Array: Uint8Array): CalculateArguments[] {
-  try {
-    const decoder = new TextDecoder('utf-8');
-    const jsonString = decoder.decode(uint8Array);
-    console.log('jsonString: ', jsonString);
-    
-    const jsonObject = JSON.parse(jsonString);
-    console.log('jsonObject: ', jsonObject);
-    
-    return jsonObject;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
+

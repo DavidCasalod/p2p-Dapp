@@ -72,11 +72,17 @@ class ExistService {
             const resultBuffer = await contract.submitTransaction(
                 'cecContractExists',
                 cecContractId,
+                "cecPrivateContractCollection"
             );
-            let result = resultBuffer.toString() === 'true'; // Convert string to boolean
-            console.log('No error');
+            let result = convertUint8ArrayToJson(resultBuffer);
+            console.log("ID:" ,cecContractId);
             gateway.close();
-            return result ? 'running' : 'not running';
+            let resultValue = await result;
+            console.log("RESULT NUEVO" ,resultValue);
+            if (resultValue === 'true') 
+                return 'Running'
+            else 
+                return 'Not running';
             
         } catch (error) {
             console.log('caught the ERROR: \n', error);
@@ -100,4 +106,15 @@ module.exports = ExistService;
  
 
 
-        
+async function convertUint8ArrayToJson(uint8Array) {
+  try {
+    const decoder = new TextDecoder('utf-8');
+    const jsonString = decoder.decode(uint8Array);
+    const jsonObject = JSON.parse(jsonString);
+    console.log('jsonObject: ', jsonObject)
+    return jsonString;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

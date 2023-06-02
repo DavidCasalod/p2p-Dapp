@@ -25,7 +25,7 @@ export default {
     "logLevel": "debug"
   },
   "/exist": {
-    "target": "http://p2ptrading-server.bip.bd4opem.ari-energy.eu",
+    "target": "http://212.32.251.169:3000",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

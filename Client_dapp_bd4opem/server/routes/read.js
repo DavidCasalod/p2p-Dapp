@@ -14,7 +14,9 @@ try {
       return res.status(500).json("Missing requied fields");
     } else {
         result = await await readInstance.readCec(cecContractId, date);
-        return res.status(200).json(String(result));
+        console.log(result)
+        console.log(typeof result)
+        return res.status(200).json(result);
     }
   } catch (error) {
     return res.status(500).json(error);
