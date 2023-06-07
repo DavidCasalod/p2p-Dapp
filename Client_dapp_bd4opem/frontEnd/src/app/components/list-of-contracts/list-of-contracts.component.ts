@@ -299,6 +299,7 @@ export class ListOfContractsComponent implements OnInit {
       )
       setTimeout(() => {
         window.location.reload();
+   
     }, 2000);
     }
   

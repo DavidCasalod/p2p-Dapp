@@ -29,12 +29,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   methods: 'GET,PUT,POST,DELETE,OPTIONS',
 //   allowedHeaders: 'Content-Type, Authorization, Content-Length, X-Requested-With, Access-Control-Allow-Origin'
 // };
-var corsOptions = {
-  origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.use(cors(corsOptions));
+// var corsOptions = {
+//   origin: 'http://localhost:4200',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
+app.use(cors({
+  origin: 'http://p2ptrading-app.dev4.ari-bip.eu'
+}))
+// app.use(cors(corsOptions));
 // app.use(cors());
 app.use('/', indexRouter);
 app.use('/serviceSettings', serviceSettingsRouter);
