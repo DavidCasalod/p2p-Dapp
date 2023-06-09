@@ -141,7 +141,7 @@ export class ListOfContractsComponent implements OnInit {
   check: boolean = false;
 
   //Added for tests hardcoded coockie.
-  authToken = environment.authToken;
+  // authToken = environment.authToken;
    status_contract: any = {};
   //status_contract: string[] = [];
   
@@ -153,9 +153,9 @@ export class ListOfContractsComponent implements OnInit {
 
     async ngOnInit():  Promise<string> {
  
-    // this.token = this.cookieService.get('authentication');
+    this.token = this.cookieService.get('authentication');
  
-    this.token = this.authToken!;
+    // this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
           this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
@@ -197,8 +197,8 @@ export class ListOfContractsComponent implements OnInit {
     this.contract = contract;
     this.contract_ID = contract.contractID;
     this.contract_ID_du = contract?.data_parameters?.[0].contractID!;
-    // this.token = this.cookieService.get('authentication');
-    this.token = this.authToken!
+    this.token = this.cookieService.get('authentication');
+    // this.token = this.authToken!
     console.log(this.token);
     this.contractservice.fetchContract(this.token, contract?.data_parameters?.[0].contractID!).subscribe(
       response => {
@@ -236,8 +236,8 @@ export class ListOfContractsComponent implements OnInit {
     this.contract = contract;
     this.contract_ID = contract.contractID;
     this.contract_ID_du = contract?.data_parameters?.[0].contractID!;
-    // this.token = this.cookieService.get('authentication');
-    this.token = this.authToken!
+    this.token = this.cookieService.get('authentication');
+    // this.token = this.authToken!
     console.log(this.token);
     console.log(contract.status!);
     this.contractservice.fetchContract(this.token, contract.contractID!).subscribe(

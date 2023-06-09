@@ -10,6 +10,7 @@ import jwtDecode from 'jwt-decode';
 import { SSITokenDecoded } from '../list-of-contracts/list-of-contracts.component';
 import { ContractService } from 'src/app/services/contract.service';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-read',
@@ -40,9 +41,10 @@ export class ReadComponent implements OnInit {
   args! : TransactionArguments 
   check: boolean = false;
     //Added for tests hardcoded coockie.
-  authToken = environment.authToken;
+  // authToken = environment.authToken;
 
   constructor(private readcecservice: ReadCecService, 
+              private cookieService: CookieService,
               private router: Router,private formBuilder: UntypedFormBuilder,
               private jsonConvertservice : JsonConvertService,
               private contractservice: ContractService,
@@ -59,8 +61,8 @@ export class ReadComponent implements OnInit {
       date: ['', Validators.required]
     });
  
-    // this.token = this.cookieService.get('authentication');
-    this.token = this.authToken!;
+    this.token = this.cookieService.get('authentication');
+    // this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
           this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
