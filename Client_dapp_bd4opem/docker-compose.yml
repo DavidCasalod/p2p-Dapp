@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   p2ptrading-app:
-    image: p2papp:test
+    image: p2p-trading-app:final
     environment:
       - VIRTUAL_HOST=p2ptrading-app.dev4.ari-bip.eu
       - VIRTUAL_PORT=80
