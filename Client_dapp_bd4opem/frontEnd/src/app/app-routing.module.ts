@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 // AuthGuard
 const routes: Routes = [
-  { path: '', pathMatch: 'full',  redirectTo: 'read'},
+  { path: '', pathMatch: 'full',  redirectTo: 'test'},
   // { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
   { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
   { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },

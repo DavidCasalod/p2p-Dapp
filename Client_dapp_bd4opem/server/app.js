@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 app.use(cors({
-  origin: 'http://p2ptrading-app.dev4.ari-bip.eu'
+  origin: 'https://p2p.atos.bd4opem.eu'
 }))
 // app.use(cors(corsOptions));
 // app.use(cors());

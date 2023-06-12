@@ -1,19 +1,21 @@
 version: '3.5'
 
 services:
-  p2ptrading-app:
-    image: p2p-trading-app:final
+  p2p:
+    image: p2p:test1
     environment:
-      - VIRTUAL_HOST=p2ptrading-app.dev4.ari-bip.eu
+      - VIRTUAL_HOST=p2p.atos.bd4opem.eu
       - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=p2p.atos.bd4opem.eu
     networks:
       - uself_net
 
   p2ptrading-server:
-    image: server:test
+    image: p2pserver:test
     environment:
       - VIRTUAL_HOST=p2ptrading-server.dev4.ari-bip.eu
       - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=p2ptrading-server.dev4.ari-bip.eu
     volumes:
       - /home/david.casalod/go/src/github.com/david/fabric-samples:/home/david.casalod/go/src/github.com/david/fabric-samples
     networks:
