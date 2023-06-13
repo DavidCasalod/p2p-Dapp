@@ -158,7 +158,7 @@ export class ListOfContractsComponent implements OnInit {
     // this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
-          this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
+          "ServiceUser", this.SSIAuthentication.organisationId).subscribe(
             response => {
             this.Contracts = response;
             for (let contract of this.Contracts) {

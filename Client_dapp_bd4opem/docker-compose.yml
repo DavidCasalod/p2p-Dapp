@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   p2p:
-    image: p2p:test1
+    image: p2p:test4
     environment:
       - VIRTUAL_HOST=p2p.atos.bd4opem.eu
       - VIRTUAL_PORT=80

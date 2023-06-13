@@ -9,7 +9,7 @@
       </div>
       <ng-template #elseBlock>
         <mat-form-field appearance="fill">
-          <mat-label>contract id</mat-label>
+         
           <mat-select class="form-control" formControlName="contractId">
             <ng-container *ngFor="let contract of Contracts">
               <mat-option *ngIf="contract.status! === 'Active'" [value]="contract.contractID!">
@@ -26,12 +26,15 @@
       <label for="exampleInputEmail1">Year month:</label>
       <input type="text" class="form-control" formControlName="date" id="date" aria-describedby="date" placeholder=" year month 2020-12">
     </div>
-  <button type="submit" [disabled]="!addForm.valid" class="btn btn-danger">Submit</button>
+    <div>
+      <button mat-raised-button color="primary" >Submit</button>
+    </div>
+<br>
 <br>
   <div class="form-group col-md-12">
     <label for="exampleInputEmail1">Download your results</label>
     <br>
-    <button (click)="download()"> Download csv</button>
+    <button mat-raised-button color="accent" (click)="download()"> Download csv</button>
   </div> 
 </form>
 <br>

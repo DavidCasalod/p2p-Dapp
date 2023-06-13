@@ -12,6 +12,7 @@ import { ContractService } from 'src/app/services/contract.service';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
+
 @Component({
   selector: 'app-read',
   templateUrl: './read.component.html',

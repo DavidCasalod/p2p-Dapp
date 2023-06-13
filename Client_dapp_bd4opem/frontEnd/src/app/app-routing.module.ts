@@ -8,8 +8,8 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: '', pathMatch: 'full',  redirectTo: 'test'},
   // { path: 'service', component:FirstRouteComponent, canActivate: [AuthGuard]},
-  { path: 'read', component: ReadComponent ,canActivate: [AuthGuard]},
-  { path: 'test', component: ListOfContractsComponent,canActivate: [AuthGuard] },
+  { path: 'read', component: ReadComponent , canActivate: [AuthGuard]},
+  { path: 'test', component: ListOfContractsComponent, canActivate: [AuthGuard]},
   // { path: 'read', component: ReadComponent },
   // { path: 'test', component: ListOfContractsComponent},
 
