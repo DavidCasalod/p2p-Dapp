@@ -41,6 +41,9 @@ export class ReadComponent implements OnInit {
   arguments! : TransactionArguments ;
   args! : TransactionArguments 
   check: boolean = false;
+  date: string = '';
+  year: string = '';
+  month: string = '';
     //Added for tests hardcoded coockie.
   // authToken = environment.authToken;
 
@@ -49,14 +52,49 @@ export class ReadComponent implements OnInit {
               private router: Router,private formBuilder: UntypedFormBuilder,
               private jsonConvertservice : JsonConvertService,
               private contractservice: ContractService,
-             ) { }
+             ) {}
   
   addForm = new UntypedFormGroup({
     contractId: new UntypedFormControl('', Validators.required),
     date: new UntypedFormControl('', Validators.required)
   });
+  years: number[] = [];
+  months: { value: string; name: string }[] = [
+    { value: '01', name: '1' },
+    { value: '02', name: '2' },
+    { value: '03', name: '3' },
+    { value: '04', name: '4' },
+    { value: '05', name: '5' },
+    { value: '06', name: '6' },
+    { value: '07', name: '7' },
+    { value: '08', name: '8' },
+    { value: '09', name: '9' },
+    { value: '10', name: '10' },
+    { value: '11', name: '11' },
+    { value: '12', name: '12' },
+  ];
+  updateDate(newYear: string, newMonth: string): void {
+    if (newYear) {
+      this.year = newYear;
+    }
+    if (newMonth) {
+      this.month = newMonth;
+    }
 
+    this.date = this.year + '-' + this.month;
+    console.log(this.date)
+    this.addForm.patchValue({
+      date: this.date
+    });
+  }
+  
+ 
   async ngOnInit():  Promise<string> {
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear - 10; i <= currentYear; i++) {
+      this.years.push(i);
+    }
+    this.years.reverse();
     this.addForm=this.formBuilder.group({
       contractId: ['', Validators.required],
       date: ['', Validators.required]
@@ -66,7 +104,7 @@ export class ReadComponent implements OnInit {
     // this.token = this.authToken!;
     this.SSIAuthentication = jwtDecode<SSITokenDecoded>(this.token as string);
     this.contractservice.listContractsForServiceType(this.token, this.SSIAuthentication.accountID,
-          this.SSIAuthentication.userType[0], this.SSIAuthentication.organisationId).subscribe(
+      "ServiceUser", this.SSIAuthentication.organisationId).subscribe(
             response => {
             this.Contracts = response;
             this.c = JSON.stringify(this.Contracts)
@@ -112,10 +150,19 @@ export class ReadComponent implements OnInit {
   }
   
 
-  download(){
-    console.log(this.results)
-
-    this.jsonConvertservice.downloadFile(this.results, 'Results');
+  download(addForm: { value: any; }){
+ 
+    console.log(addForm.value)
+    this.readcecservice.getResults(addForm.value).subscribe((res)=>{
+      this.router.navigateByUrl('read');
+      console.log("RESULTADO =")
+      console.log(res)
+      console.log(typeof res)
+      this.results = res;
+      console.log(this.results)
+      this.jsonConvertservice.downloadFile(this.results, 'Results');
+    } 
+    )
     
   }
 

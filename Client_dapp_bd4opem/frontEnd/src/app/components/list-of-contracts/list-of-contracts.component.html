@@ -1,40 +1,46 @@
 <td>{{ message }}</td>
   <div class="container mt-16">
     <h2> List of contracts: </h2>
-    <table class="table table-striped">
-      <thead>
-          <tr>
-            <th></th>
-            <th>Service User Contract ID</th>
-            <th>Name</th>
-            <!-- <th>Algorithm</th> -->
-            <th>Contract Status</th>
-            <th>Execution status</th>
-          </tr>
-      </thead>
-      <tbody *ngFor="let contract of Contracts; let i = index ">
-          <tr>
-            <button *ngIf="contract.status! === 'Active'" class="button button2"  (click)="onSelect(contract)">
-                <td *ngIf="contract.status! === 'Active'"> Manage </td>
-            </button>
-            <td *ngIf="contract.status! === 'Active'" >{{ contract.contractID! }}</td>
-            <ng-container *ngFor="let data_parameters of contract.data_parameters; let z = index">
-                <td *ngIf="contract.status! === 'Active'">{{ contract.business_parameters?.contractName! }}</td>
-            </ng-container>
-            <td *ngIf="contract.status! === 'Active'">{{ contract.status! }}</td>
-            <td *ngIf="contract.status! === 'Active'" >
-              <div>
-                <p style="color:MediumSeaGreen;" *ngIf="status_contract[contract.contractID!] === 'Running'">Running  &#x25CF;</p>
-                <p *ngIf="status_contract[contract.contractID!] !== 'Running'">Not running</p>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-    </table>
+    <div>
+      <table class="table table-striped">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Service User Contract ID</th>
+              <th>Name</th>
+              <th>Contract Status</th>
+              <th>Execution status</th>
+            </tr>
+        </thead>
+      </table>
+      <div style="max-height: 224px; overflow-y: auto;">
+        <table class="table table-striped">
+            <tbody *ngFor="let contract of Contracts; let i = index ">
+                <tr>
+                  <button *ngIf="contract.status! === 'Active'" class="button button2"  (click)="onSelect(contract)">
+                      <td *ngIf="contract.status! === 'Active'"> Manage </td>
+                  </button>
+                  <td *ngIf="contract.status! === 'Active'" >{{ contract.contractID! }}</td>
+                  <ng-container *ngFor="let data_parameters of contract.data_parameters; let z = index">
+                      <td *ngIf="contract.status! === 'Active'">{{ contract.business_parameters?.contractName! }}</td>
+                  </ng-container>
+                  <td *ngIf="contract.status! === 'Active'">{{ contract.status! }}</td>
+                  <td *ngIf="contract.status! === 'Active'" >
+                    <div>
+                      <p style="color:MediumSeaGreen;" *ngIf="status_contract[contract.contractID!] === 'Running'">Running  &#x25CF;</p>
+                      <p *ngIf="status_contract[contract.contractID!] !== 'Running'">Not running</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+    
     <br>
     <br>
     <div *ngIf="selectedContract ">
-      <h4 >Contract info</h4>
+      <h2>Contract management</h2>
       <table class="table table-striped">
           <thead>
             <tr>

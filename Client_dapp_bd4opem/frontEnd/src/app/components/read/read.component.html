@@ -1,42 +1,62 @@
-
 <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
-
-    <div class="form-group col-md-6">
-      <label for="exampleInputEmail1">CEC Contract Id:</label>
-      <br>
-      <div *ngIf="SSIAuthentication.userType[0]=== 'DataProvider'; else elseBlock" >
-        <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Cec contract id">    
-      </div>
-      <ng-template #elseBlock>
-        <mat-form-field appearance="fill">
-         
-          <mat-select class="form-control" formControlName="contractId">
-            <ng-container *ngFor="let contract of Contracts">
-              <mat-option *ngIf="contract.status! === 'Active'" [value]="contract.contractID!">
-                {{ contract.contractID! }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>  
-      </ng-template>
-
-    </div>
-
-    <div class="form-group col-md-6">
-      <label for="exampleInputEmail1">Year month:</label>
-      <input type="text" class="form-control" formControlName="date" id="date" aria-describedby="date" placeholder=" year month 2020-12">
-    </div>
-    <div>
-      <button mat-raised-button color="primary" >Submit</button>
-    </div>
-<br>
-<br>
-  <div class="form-group col-md-12">
-    <label for="exampleInputEmail1">Download your results</label>
+  <div class="form-group col-md-10">
+    <label for="exampleInputEmail1">CEC Contract name:</label>
     <br>
-    <button mat-raised-button color="accent" (click)="download()"> Download csv</button>
-  </div> 
+    <div *ngIf="!SSIAuthentication.userType.includes('ServiceUser'); else elseBlock"
+         style="background-color: transparent; display: inline-block;">
+      <input type="text" class="form-control" formControlName="contractId" id="exampleInputEmail1"
+        aria-describedby="emailHelp" placeholder=" Cec contract id" >
+    </div>    
+    <ng-template #elseBlock>
+      <mat-form-field appearance="fill" style="background-color: transparent;">
+        <mat-select class="form-control" formControlName="contractId" >
+          <ng-container *ngFor="let contract of Contracts">
+            <mat-option *ngIf="contract.status! === 'Active'" [value]="contract.contractID!">
+              <!-- {{ contract.contractID! }} -->
+              <ng-container *ngFor="let data_parameters of contract.data_parameters; let z = index">
+                {{ contract.business_parameters?.contractName! }}
+              </ng-container>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </ng-template>
+  </div>
+
+
+  <div class="form-group col-md-6">
+    <div class="row">
+      <div class="col">
+        <div>
+          <label for="exampleInputEmail1">Year:</label>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-select class="form-control" [(ngModel)]="year" placeholder="Year" (selectionChange)="updateDate($event.value, month)">
+            <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <div>
+          <label for="exampleInputEmail1">Month:</label>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-select class="form-control" [(ngModel)]="month" placeholder="Month" (selectionChange)="updateDate(year, $event.value)">
+            <mat-option *ngFor="let month of months" [value]="month.value">{{ month.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  
+  <input type="hidden" formControlName="date" [value]="date">
+
+  <div>
+    <label for="exampleInputEmail1">Download your results:</label>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="download(addForm)">Download csv</button>
+  </div>
+  <br>
 </form>
-<br>
-
-
