@@ -34,7 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 app.use(cors({
-  origin: 'https://p2p.atos.bd4opem.eu'
+//   origin: 'https://p2p.atos.bd4opem.eu'
+origin: 'http://localhost:4200'
 }))
 // app.use(cors(corsOptions));
 // app.use(cors());
